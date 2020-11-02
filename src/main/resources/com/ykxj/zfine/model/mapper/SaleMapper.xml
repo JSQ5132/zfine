@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.SaleMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.Sale">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="Appid" jdbcType="VARCHAR" property="appid" />
+    <result column="Busdate" jdbcType="TIMESTAMP" property="busdate" />
+    <result column="Organ" jdbcType="VARCHAR" property="organ" />
+    <result column="Depart" jdbcType="VARCHAR" property="depart" />
+    <result column="Provider" jdbcType="VARCHAR" property="provider" />
+    <result column="Code" jdbcType="VARCHAR" property="code" />
+    <result column="Barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="Acceptid" jdbcType="VARCHAR" property="acceptid" />
+    <result column="Amount" jdbcType="DECIMAL" property="amount" />
+    <result column="Sum_Cost" jdbcType="DECIMAL" property="sumCost" />
+    <result column="Sum_Price" jdbcType="DECIMAL" property="sumPrice" />
+    <result column="ND" jdbcType="DECIMAL" property="nd" />
+    <result column="Moditime" jdbcType="TIMESTAMP" property="moditime" />
+    <result column="nature" jdbcType="INTEGER" property="nature" />
+    <result column="sum_disc" jdbcType="DECIMAL" property="sumDisc" />
+    <result column="Sort" jdbcType="VARCHAR" property="sort" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    t_id, Appid, Busdate, Organ, Depart, Provider, Code, Barcode, Acceptid, Amount, Sum_Cost, 
+    Sum_Price, ND, Moditime, nature, sum_disc, Sort
+  </sql>
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.SaleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sale
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sale
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sale
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.SaleExample">
+    delete from sale
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.Sale">
+    insert into sale (t_id, Appid, Busdate, 
+      Organ, Depart, Provider, 
+      Code, Barcode, Acceptid, 
+      Amount, Sum_Cost, Sum_Price, 
+      ND, Moditime, nature, 
+      sum_disc, Sort)
+    values (#{tId,jdbcType=INTEGER}, #{appid,jdbcType=VARCHAR}, #{busdate,jdbcType=TIMESTAMP}, 
+      #{organ,jdbcType=VARCHAR}, #{depart,jdbcType=VARCHAR}, #{provider,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{barcode,jdbcType=VARCHAR}, #{acceptid,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{sumCost,jdbcType=DECIMAL}, #{sumPrice,jdbcType=DECIMAL}, 
+      #{nd,jdbcType=DECIMAL}, #{moditime,jdbcType=TIMESTAMP}, #{nature,jdbcType=INTEGER}, 
+      #{sumDisc,jdbcType=DECIMAL}, #{sort,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.Sale">
+    insert into sale
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="appid != null">
+        Appid,
+      </if>
+      <if test="busdate != null">
+        Busdate,
+      </if>
+      <if test="organ != null">
+        Organ,
+      </if>
+      <if test="depart != null">
+        Depart,
+      </if>
+      <if test="provider != null">
+        Provider,
+      </if>
+      <if test="code != null">
+        Code,
+      </if>
+      <if test="barcode != null">
+        Barcode,
+      </if>
+      <if test="acceptid != null">
+        Acceptid,
+      </if>
+      <if test="amount != null">
+        Amount,
+      </if>
+      <if test="sumCost != null">
+        Sum_Cost,
+      </if>
+      <if test="sumPrice != null">
+        Sum_Price,
+      </if>
+      <if test="nd != null">
+        ND,
+      </if>
+      <if test="moditime != null">
+        Moditime,
+      </if>
+      <if test="nature != null">
+        nature,
+      </if>
+      <if test="sumDisc != null">
+        sum_disc,
+      </if>
+      <if test="sort != null">
+        Sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="busdate != null">
+        #{busdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organ != null">
+        #{organ,jdbcType=VARCHAR},
+      </if>
+      <if test="depart != null">
+        #{depart,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null">
+        #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null">
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptid != null">
+        #{acceptid,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="sumCost != null">
+        #{sumCost,jdbcType=DECIMAL},
+      </if>
+      <if test="sumPrice != null">
+        #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="nd != null">
+        #{nd,jdbcType=DECIMAL},
+      </if>
+      <if test="moditime != null">
+        #{moditime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nature != null">
+        #{nature,jdbcType=INTEGER},
+      </if>
+      <if test="sumDisc != null">
+        #{sumDisc,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.SaleExample" resultType="java.lang.Integer">
+    select count(*) from sale
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sale
+    <set>
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appid != null">
+        Appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busdate != null">
+        Busdate = #{record.busdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.organ != null">
+        Organ = #{record.organ,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depart != null">
+        Depart = #{record.depart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provider != null">
+        Provider = #{record.provider,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        Code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barcode != null">
+        Barcode = #{record.barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acceptid != null">
+        Acceptid = #{record.acceptid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null">
+        Amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumCost != null">
+        Sum_Cost = #{record.sumCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumPrice != null">
+        Sum_Price = #{record.sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nd != null">
+        ND = #{record.nd,jdbcType=DECIMAL},
+      </if>
+      <if test="record.moditime != null">
+        Moditime = #{record.moditime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nature != null">
+        nature = #{record.nature,jdbcType=INTEGER},
+      </if>
+      <if test="record.sumDisc != null">
+        sum_disc = #{record.sumDisc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sort != null">
+        Sort = #{record.sort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sale
+    set t_id = #{record.tId,jdbcType=INTEGER},
+      Appid = #{record.appid,jdbcType=VARCHAR},
+      Busdate = #{record.busdate,jdbcType=TIMESTAMP},
+      Organ = #{record.organ,jdbcType=VARCHAR},
+      Depart = #{record.depart,jdbcType=VARCHAR},
+      Provider = #{record.provider,jdbcType=VARCHAR},
+      Code = #{record.code,jdbcType=VARCHAR},
+      Barcode = #{record.barcode,jdbcType=VARCHAR},
+      Acceptid = #{record.acceptid,jdbcType=VARCHAR},
+      Amount = #{record.amount,jdbcType=DECIMAL},
+      Sum_Cost = #{record.sumCost,jdbcType=DECIMAL},
+      Sum_Price = #{record.sumPrice,jdbcType=DECIMAL},
+      ND = #{record.nd,jdbcType=DECIMAL},
+      Moditime = #{record.moditime,jdbcType=TIMESTAMP},
+      nature = #{record.nature,jdbcType=INTEGER},
+      sum_disc = #{record.sumDisc,jdbcType=DECIMAL},
+      Sort = #{record.sort,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.Sale">
+    update sale
+    <set>
+      <if test="appid != null">
+        Appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="busdate != null">
+        Busdate = #{busdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organ != null">
+        Organ = #{organ,jdbcType=VARCHAR},
+      </if>
+      <if test="depart != null">
+        Depart = #{depart,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null">
+        Provider = #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        Code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null">
+        Barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptid != null">
+        Acceptid = #{acceptid,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        Amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="sumCost != null">
+        Sum_Cost = #{sumCost,jdbcType=DECIMAL},
+      </if>
+      <if test="sumPrice != null">
+        Sum_Price = #{sumPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="nd != null">
+        ND = #{nd,jdbcType=DECIMAL},
+      </if>
+      <if test="moditime != null">
+        Moditime = #{moditime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nature != null">
+        nature = #{nature,jdbcType=INTEGER},
+      </if>
+      <if test="sumDisc != null">
+        sum_disc = #{sumDisc,jdbcType=DECIMAL},
+      </if>
+      <if test="sort != null">
+        Sort = #{sort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.Sale">
+    update sale
+    set Appid = #{appid,jdbcType=VARCHAR},
+      Busdate = #{busdate,jdbcType=TIMESTAMP},
+      Organ = #{organ,jdbcType=VARCHAR},
+      Depart = #{depart,jdbcType=VARCHAR},
+      Provider = #{provider,jdbcType=VARCHAR},
+      Code = #{code,jdbcType=VARCHAR},
+      Barcode = #{barcode,jdbcType=VARCHAR},
+      Acceptid = #{acceptid,jdbcType=VARCHAR},
+      Amount = #{amount,jdbcType=DECIMAL},
+      Sum_Cost = #{sumCost,jdbcType=DECIMAL},
+      Sum_Price = #{sumPrice,jdbcType=DECIMAL},
+      ND = #{nd,jdbcType=DECIMAL},
+      Moditime = #{moditime,jdbcType=TIMESTAMP},
+      nature = #{nature,jdbcType=INTEGER},
+      sum_disc = #{sumDisc,jdbcType=DECIMAL},
+      Sort = #{sort,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+</mapper>

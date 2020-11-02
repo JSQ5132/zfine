@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.AcceptChiMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.AcceptChi">
+    <id column="ND" jdbcType="INTEGER" property="nd" />
+    <result column="Appid" jdbcType="VARCHAR" property="appid" />
+    <result column="Id" jdbcType="VARCHAR" property="id" />
+    <result column="Code" jdbcType="VARCHAR" property="code" />
+    <result column="Barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="Amount" jdbcType="DECIMAL" property="amount" />
+    <result column="Conversion" jdbcType="DECIMAL" property="conversion" />
+    <result column="Pack_Amou" jdbcType="DECIMAL" property="packAmou" />
+    <result column="Costprice" jdbcType="DECIMAL" property="costprice" />
+    <result column="Sum_cost" jdbcType="DECIMAL" property="sumCost" />
+    <result column="Price" jdbcType="DECIMAL" property="price" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+    <result column="Moditime" jdbcType="TIMESTAMP" property="moditime" />
+    <result column="Sendamou" jdbcType="DECIMAL" property="sendamou" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ND, Appid, Id, Code, Barcode, Amount, Conversion, Pack_Amou, Costprice, Sum_cost, 
+    Price, Remark, Moditime, Sendamou
+  </sql>
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.AcceptChiExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from accept_chi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from accept_chi
+    where ND = #{nd,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from accept_chi
+    where ND = #{nd,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.AcceptChiExample">
+    delete from accept_chi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.AcceptChi">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into accept_chi (ND, AppidCode, 
+      Barcode, Amount, Conversion, 
+      Pack_Amou, Costprice, Sum_cost, 
+      Price, Remark, Moditime, 
+      Sendamou)
+    values (#{nd,jdbcType=INTEGER}, #{appid,jdbcType=VARCHAR}#{code,jdbcType=VARCHAR}, 
+      #{barcode,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{conversion,jdbcType=DECIMAL}, 
+      #{packAmou,jdbcType=DECIMAL}, #{costprice,jdbcType=DECIMAL}, #{sumCost,jdbcType=DECIMAL}, 
+      #{price,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{moditime,jdbcType=TIMESTAMP}, 
+      #{sendamou,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.AcceptChi">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into accept_chi
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nd != null">
+        ND,
+      </if>
+      <if test="appid != null">
+        Appid,
+      </if>
+      <if test="code != null">
+        Code,
+      </if>
+      <if test="barcode != null">
+        Barcode,
+      </if>
+      <if test="amount != null">
+        Amount,
+      </if>
+      <if test="conversion != null">
+        Conversion,
+      </if>
+      <if test="packAmou != null">
+        Pack_Amou,
+      </if>
+      <if test="costprice != null">
+        Costprice,
+      </if>
+      <if test="sumCost != null">
+        Sum_cost,
+      </if>
+      <if test="price != null">
+        Price,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="moditime != null">
+        Moditime,
+      </if>
+      <if test="sendamou != null">
+        Sendamou,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nd != null">
+        #{nd,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null">
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="conversion != null">
+        #{conversion,jdbcType=DECIMAL},
+      </if>
+      <if test="packAmou != null">
+        #{packAmou,jdbcType=DECIMAL},
+      </if>
+      <if test="costprice != null">
+        #{costprice,jdbcType=DECIMAL},
+      </if>
+      <if test="sumCost != null">
+        #{sumCost,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="moditime != null">
+        #{moditime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendamou != null">
+        #{sendamou,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.AcceptChiExample" resultType="java.lang.Integer">
+    select count(*) from accept_chi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update accept_chi
+    <set>
+      <if test="record.nd != null">
+        ND = #{record.nd,jdbcType=INTEGER},
+      </if>
+      <if test="record.appid != null">
+        Appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        Code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barcode != null">
+        Barcode = #{record.barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null">
+        Amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conversion != null">
+        Conversion = #{record.conversion,jdbcType=DECIMAL},
+      </if>
+      <if test="record.packAmou != null">
+        Pack_Amou = #{record.packAmou,jdbcType=DECIMAL},
+      </if>
+      <if test="record.costprice != null">
+        Costprice = #{record.costprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumCost != null">
+        Sum_cost = #{record.sumCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.price != null">
+        Price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moditime != null">
+        Moditime = #{record.moditime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sendamou != null">
+        Sendamou = #{record.sendamou,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update accept_chi
+    set ND = #{record.nd,jdbcType=INTEGER},
+      Appid = #{record.appid,jdbcType=VARCHAR},
+      Id = #{record.id,jdbcType=VARCHAR},
+      Code = #{record.code,jdbcType=VARCHAR},
+      Barcode = #{record.barcode,jdbcType=VARCHAR},
+      Amount = #{record.amount,jdbcType=DECIMAL},
+      Conversion = #{record.conversion,jdbcType=DECIMAL},
+      Pack_Amou = #{record.packAmou,jdbcType=DECIMAL},
+      Costprice = #{record.costprice,jdbcType=DECIMAL},
+      Sum_cost = #{record.sumCost,jdbcType=DECIMAL},
+      Price = #{record.price,jdbcType=DECIMAL},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      Moditime = #{record.moditime,jdbcType=TIMESTAMP},
+      Sendamou = #{record.sendamou,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.AcceptChi">
+    update accept_chi
+    <set>
+      <if test="appid != null">
+        Appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        Id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        Code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null">
+        Barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        Amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="conversion != null">
+        Conversion = #{conversion,jdbcType=DECIMAL},
+      </if>
+      <if test="packAmou != null">
+        Pack_Amou = #{packAmou,jdbcType=DECIMAL},
+      </if>
+      <if test="costprice != null">
+        Costprice = #{costprice,jdbcType=DECIMAL},
+      </if>
+      <if test="sumCost != null">
+        Sum_cost = #{sumCost,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        Price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="moditime != null">
+        Moditime = #{moditime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendamou != null">
+        Sendamou = #{sendamou,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ND = #{nd,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.AcceptChi">
+    update accept_chi
+    set Appid = #{appid,jdbcType=VARCHAR},
+      Id = #{id,jdbcType=VARCHAR},
+      Code = #{code,jdbcType=VARCHAR},
+      Barcode = #{barcode,jdbcType=VARCHAR},
+      Amount = #{amount,jdbcType=DECIMAL},
+      Conversion = #{conversion,jdbcType=DECIMAL},
+      Pack_Amou = #{packAmou,jdbcType=DECIMAL},
+      Costprice = #{costprice,jdbcType=DECIMAL},
+      Sum_cost = #{sumCost,jdbcType=DECIMAL},
+      Price = #{price,jdbcType=DECIMAL},
+      Remark = #{remark,jdbcType=VARCHAR},
+      Moditime = #{moditime,jdbcType=TIMESTAMP},
+      Sendamou = #{sendamou,jdbcType=DECIMAL}
+    where ND = #{nd,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.BalanceChiMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.BalanceChi">
+    <id column="ND" jdbcType="INTEGER" property="nd" />
+    <result column="Appid" jdbcType="VARCHAR" property="appid" />
+    <result column="Id" jdbcType="VARCHAR" property="id" />
+    <result column="Voucher" jdbcType="VARCHAR" property="voucher" />
+    <result column="Resume" jdbcType="VARCHAR" property="resume" />
+    <result column="Sum_wscost" jdbcType="DECIMAL" property="sumWscost" />
+    <result column="Sum_tax" jdbcType="DECIMAL" property="sumTax" />
+    <result column="Sum_cost" jdbcType="DECIMAL" property="sumCost" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+    <result column="Moditime" jdbcType="TIMESTAMP" property="moditime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="busdate" jdbcType="TIMESTAMP" property="busdate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ND, Appid, Id, Voucher, Resume, Sum_wscost, Sum_tax, Sum_cost, Remark, Moditime, 
+    state, busdate
+  </sql>
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.BalanceChiExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from balance_chi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from balance_chi
+    where ND = #{nd,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from balance_chi
+    where ND = #{nd,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.BalanceChiExample">
+    delete from balance_chi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.BalanceChi">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into balance_chi (ND, AppidVoucher, 
+      Resume, Sum_wscost, Sum_tax, 
+      Sum_cost, Remark, Moditime, 
+      state, busdate)
+    values (#{nd,jdbcType=INTEGER}, #{appid,jdbcType=VARCHAR}#{voucher,jdbcType=VARCHAR}, 
+      #{resume,jdbcType=VARCHAR}, #{sumWscost,jdbcType=DECIMAL}, #{sumTax,jdbcType=DECIMAL}, 
+      #{sumCost,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{moditime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER}, #{busdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.BalanceChi">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into balance_chi
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nd != null">
+        ND,
+      </if>
+      <if test="appid != null">
+        Appid,
+      </if>
+      <if test="voucher != null">
+        Voucher,
+      </if>
+      <if test="resume != null">
+        Resume,
+      </if>
+      <if test="sumWscost != null">
+        Sum_wscost,
+      </if>
+      <if test="sumTax != null">
+        Sum_tax,
+      </if>
+      <if test="sumCost != null">
+        Sum_cost,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="moditime != null">
+        Moditime,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="busdate != null">
+        busdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nd != null">
+        #{nd,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="voucher != null">
+        #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="resume != null">
+        #{resume,jdbcType=VARCHAR},
+      </if>
+      <if test="sumWscost != null">
+        #{sumWscost,jdbcType=DECIMAL},
+      </if>
+      <if test="sumTax != null">
+        #{sumTax,jdbcType=DECIMAL},
+      </if>
+      <if test="sumCost != null">
+        #{sumCost,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="moditime != null">
+        #{moditime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="busdate != null">
+        #{busdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.BalanceChiExample" resultType="java.lang.Integer">
+    select count(*) from balance_chi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update balance_chi
+    <set>
+      <if test="record.nd != null">
+        ND = #{record.nd,jdbcType=INTEGER},
+      </if>
+      <if test="record.appid != null">
+        Appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.voucher != null">
+        Voucher = #{record.voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resume != null">
+        Resume = #{record.resume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sumWscost != null">
+        Sum_wscost = #{record.sumWscost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumTax != null">
+        Sum_tax = #{record.sumTax,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sumCost != null">
+        Sum_cost = #{record.sumCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moditime != null">
+        Moditime = #{record.moditime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.busdate != null">
+        busdate = #{record.busdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update balance_chi
+    set ND = #{record.nd,jdbcType=INTEGER},
+      Appid = #{record.appid,jdbcType=VARCHAR},
+      Id = #{record.id,jdbcType=VARCHAR},
+      Voucher = #{record.voucher,jdbcType=VARCHAR},
+      Resume = #{record.resume,jdbcType=VARCHAR},
+      Sum_wscost = #{record.sumWscost,jdbcType=DECIMAL},
+      Sum_tax = #{record.sumTax,jdbcType=DECIMAL},
+      Sum_cost = #{record.sumCost,jdbcType=DECIMAL},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      Moditime = #{record.moditime,jdbcType=TIMESTAMP},
+      state = #{record.state,jdbcType=INTEGER},
+      busdate = #{record.busdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.BalanceChi">
+    update balance_chi
+    <set>
+      <if test="appid != null">
+        Appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        Id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="voucher != null">
+        Voucher = #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="resume != null">
+        Resume = #{resume,jdbcType=VARCHAR},
+      </if>
+      <if test="sumWscost != null">
+        Sum_wscost = #{sumWscost,jdbcType=DECIMAL},
+      </if>
+      <if test="sumTax != null">
+        Sum_tax = #{sumTax,jdbcType=DECIMAL},
+      </if>
+      <if test="sumCost != null">
+        Sum_cost = #{sumCost,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="moditime != null">
+        Moditime = #{moditime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="busdate != null">
+        busdate = #{busdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ND = #{nd,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.BalanceChi">
+    update balance_chi
+    set Appid = #{appid,jdbcType=VARCHAR},
+      Id = #{id,jdbcType=VARCHAR},
+      Voucher = #{voucher,jdbcType=VARCHAR},
+      Resume = #{resume,jdbcType=VARCHAR},
+      Sum_wscost = #{sumWscost,jdbcType=DECIMAL},
+      Sum_tax = #{sumTax,jdbcType=DECIMAL},
+      Sum_cost = #{sumCost,jdbcType=DECIMAL},
+      Remark = #{remark,jdbcType=VARCHAR},
+      Moditime = #{moditime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      busdate = #{busdate,jdbcType=TIMESTAMP}
+    where ND = #{nd,jdbcType=INTEGER}
+  </update>
+</mapper>

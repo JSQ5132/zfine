@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.UsercacheFreezeMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.UsercacheFreeze">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="F_Account" jdbcType="VARCHAR" property="fAccount" />
+    <result column="F_OpenId" jdbcType="VARCHAR" property="fOpenid" />
+    <result column="F_Phone" jdbcType="VARCHAR" property="fPhone" />
+    <result column="DueTime" jdbcType="VARCHAR" property="duetime" />
+    <result column="LoginTime" jdbcType="VARCHAR" property="logintime" />
+    <result column="LastLoginTime" jdbcType="VARCHAR" property="lastlogintime" />
+    <result column="F_Id" jdbcType="VARCHAR" property="fId" />
+    <result column="IsInfo" jdbcType="VARCHAR" property="isinfo" />
+    <result column="Info_Openid" jdbcType="VARCHAR" property="infoOpenid" />
+    <result column="Unionid" jdbcType="VARCHAR" property="unionid" />
+    <result column="gzh_Openid" jdbcType="VARCHAR" property="gzhOpenid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    t_id, F_Account, F_OpenId, F_Phone, DueTime, LoginTime, LastLoginTime, F_Id, IsInfo, 
+    Info_Openid, Unionid, gzh_Openid
+  </sql>
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.UsercacheFreezeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from usercache_freeze
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from usercache_freeze
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from usercache_freeze
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.UsercacheFreezeExample">
+    delete from usercache_freeze
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.UsercacheFreeze">
+    insert into usercache_freeze (t_id, F_Account, F_OpenId, 
+      F_Phone, DueTime, LoginTime, 
+      LastLoginTime, F_Id, IsInfo, 
+      Info_Openid, Unionid, gzh_Openid
+      )
+    values (#{tId,jdbcType=INTEGER}, #{fAccount,jdbcType=VARCHAR}, #{fOpenid,jdbcType=VARCHAR}, 
+      #{fPhone,jdbcType=VARCHAR}, #{duetime,jdbcType=VARCHAR}, #{logintime,jdbcType=VARCHAR}, 
+      #{lastlogintime,jdbcType=VARCHAR}, #{fId,jdbcType=VARCHAR}, #{isinfo,jdbcType=VARCHAR}, 
+      #{infoOpenid,jdbcType=VARCHAR}, #{unionid,jdbcType=VARCHAR}, #{gzhOpenid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.UsercacheFreeze">
+    insert into usercache_freeze
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="fAccount != null">
+        F_Account,
+      </if>
+      <if test="fOpenid != null">
+        F_OpenId,
+      </if>
+      <if test="fPhone != null">
+        F_Phone,
+      </if>
+      <if test="duetime != null">
+        DueTime,
+      </if>
+      <if test="logintime != null">
+        LoginTime,
+      </if>
+      <if test="lastlogintime != null">
+        LastLoginTime,
+      </if>
+      <if test="fId != null">
+        F_Id,
+      </if>
+      <if test="isinfo != null">
+        IsInfo,
+      </if>
+      <if test="infoOpenid != null">
+        Info_Openid,
+      </if>
+      <if test="unionid != null">
+        Unionid,
+      </if>
+      <if test="gzhOpenid != null">
+        gzh_Openid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="fAccount != null">
+        #{fAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="fOpenid != null">
+        #{fOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="fPhone != null">
+        #{fPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="duetime != null">
+        #{duetime,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null">
+        #{logintime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null">
+        #{lastlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="isinfo != null">
+        #{isinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="infoOpenid != null">
+        #{infoOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="gzhOpenid != null">
+        #{gzhOpenid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.UsercacheFreezeExample" resultType="java.lang.Integer">
+    select count(*) from usercache_freeze
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update usercache_freeze
+    <set>
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fAccount != null">
+        F_Account = #{record.fAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fOpenid != null">
+        F_OpenId = #{record.fOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPhone != null">
+        F_Phone = #{record.fPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.duetime != null">
+        DueTime = #{record.duetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logintime != null">
+        LoginTime = #{record.logintime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastlogintime != null">
+        LastLoginTime = #{record.lastlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fId != null">
+        F_Id = #{record.fId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isinfo != null">
+        IsInfo = #{record.isinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoOpenid != null">
+        Info_Openid = #{record.infoOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unionid != null">
+        Unionid = #{record.unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gzhOpenid != null">
+        gzh_Openid = #{record.gzhOpenid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update usercache_freeze
+    set t_id = #{record.tId,jdbcType=INTEGER},
+      F_Account = #{record.fAccount,jdbcType=VARCHAR},
+      F_OpenId = #{record.fOpenid,jdbcType=VARCHAR},
+      F_Phone = #{record.fPhone,jdbcType=VARCHAR},
+      DueTime = #{record.duetime,jdbcType=VARCHAR},
+      LoginTime = #{record.logintime,jdbcType=VARCHAR},
+      LastLoginTime = #{record.lastlogintime,jdbcType=VARCHAR},
+      F_Id = #{record.fId,jdbcType=VARCHAR},
+      IsInfo = #{record.isinfo,jdbcType=VARCHAR},
+      Info_Openid = #{record.infoOpenid,jdbcType=VARCHAR},
+      Unionid = #{record.unionid,jdbcType=VARCHAR},
+      gzh_Openid = #{record.gzhOpenid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.UsercacheFreeze">
+    update usercache_freeze
+    <set>
+      <if test="fAccount != null">
+        F_Account = #{fAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="fOpenid != null">
+        F_OpenId = #{fOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="fPhone != null">
+        F_Phone = #{fPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="duetime != null">
+        DueTime = #{duetime,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null">
+        LoginTime = #{logintime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null">
+        LastLoginTime = #{lastlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="fId != null">
+        F_Id = #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="isinfo != null">
+        IsInfo = #{isinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="infoOpenid != null">
+        Info_Openid = #{infoOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        Unionid = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="gzhOpenid != null">
+        gzh_Openid = #{gzhOpenid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.UsercacheFreeze">
+    update usercache_freeze
+    set F_Account = #{fAccount,jdbcType=VARCHAR},
+      F_OpenId = #{fOpenid,jdbcType=VARCHAR},
+      F_Phone = #{fPhone,jdbcType=VARCHAR},
+      DueTime = #{duetime,jdbcType=VARCHAR},
+      LoginTime = #{logintime,jdbcType=VARCHAR},
+      LastLoginTime = #{lastlogintime,jdbcType=VARCHAR},
+      F_Id = #{fId,jdbcType=VARCHAR},
+      IsInfo = #{isinfo,jdbcType=VARCHAR},
+      Info_Openid = #{infoOpenid,jdbcType=VARCHAR},
+      Unionid = #{unionid,jdbcType=VARCHAR},
+      gzh_Openid = #{gzhOpenid,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+</mapper>

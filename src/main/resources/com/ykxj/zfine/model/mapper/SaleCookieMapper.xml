@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.SaleCookieMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.SaleCookie">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="keys" jdbcType="VARCHAR" property="keys" />
+    <result column="counts" jdbcType="VARCHAR" property="counts" />
+    <result column="dates" jdbcType="VARCHAR" property="dates" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    t_id, keys, counts, dates
+  </sql>
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.SaleCookieExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sale_cookie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sale_cookie
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sale_cookie
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.SaleCookieExample">
+    delete from sale_cookie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.SaleCookie">
+    insert into sale_cookie (t_id, keys, counts, 
+      dates)
+    values (#{tId,jdbcType=INTEGER}, #{keys,jdbcType=VARCHAR}, #{counts,jdbcType=VARCHAR}, 
+      #{dates,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.SaleCookie">
+    insert into sale_cookie
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="keys != null">
+        keys,
+      </if>
+      <if test="counts != null">
+        counts,
+      </if>
+      <if test="dates != null">
+        dates,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="keys != null">
+        #{keys,jdbcType=VARCHAR},
+      </if>
+      <if test="counts != null">
+        #{counts,jdbcType=VARCHAR},
+      </if>
+      <if test="dates != null">
+        #{dates,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.SaleCookieExample" resultType="java.lang.Integer">
+    select count(*) from sale_cookie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sale_cookie
+    <set>
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
+      </if>
+      <if test="record.keys != null">
+        keys = #{record.keys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.counts != null">
+        counts = #{record.counts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dates != null">
+        dates = #{record.dates,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sale_cookie
+    set t_id = #{record.tId,jdbcType=INTEGER},
+      keys = #{record.keys,jdbcType=VARCHAR},
+      counts = #{record.counts,jdbcType=VARCHAR},
+      dates = #{record.dates,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.SaleCookie">
+    update sale_cookie
+    <set>
+      <if test="keys != null">
+        keys = #{keys,jdbcType=VARCHAR},
+      </if>
+      <if test="counts != null">
+        counts = #{counts,jdbcType=VARCHAR},
+      </if>
+      <if test="dates != null">
+        dates = #{dates,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.SaleCookie">
+    update sale_cookie
+    set keys = #{keys,jdbcType=VARCHAR},
+      counts = #{counts,jdbcType=VARCHAR},
+      dates = #{dates,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+</mapper>

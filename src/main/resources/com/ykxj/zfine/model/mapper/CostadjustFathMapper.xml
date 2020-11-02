@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.CostadjustFathMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.CostadjustFath">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="provider" jdbcType="VARCHAR" property="provider" />
+    <result column="contractid" jdbcType="VARCHAR" property="contractid" />
+    <result column="busdate" jdbcType="TIMESTAMP" property="busdate" />
+    <result column="organ" jdbcType="VARCHAR" property="organ" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="verdate" jdbcType="TIMESTAMP" property="verdate" />
+    <result column="moditime" jdbcType="TIMESTAMP" property="moditime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    t_id, appid, id, provider, contractid, busdate, organ, remark, operator, verdate, 
+    moditime
+  </sql>
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.CostadjustFathExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from costadjust_fath
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from costadjust_fath
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from costadjust_fath
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.CostadjustFathExample">
+    delete from costadjust_fath
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.CostadjustFath">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into costadjust_fath (t_id, appidprovider, 
+      contractid, busdate, organ, 
+      remark, operator, verdate, 
+      moditime)
+    values (#{tId,jdbcType=INTEGER}, #{appid,jdbcType=VARCHAR}#{provider,jdbcType=VARCHAR}, 
+      #{contractid,jdbcType=VARCHAR}, #{busdate,jdbcType=TIMESTAMP}, #{organ,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{verdate,jdbcType=TIMESTAMP}, 
+      #{moditime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.CostadjustFath">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into costadjust_fath
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="provider != null">
+        provider,
+      </if>
+      <if test="contractid != null">
+        contractid,
+      </if>
+      <if test="busdate != null">
+        busdate,
+      </if>
+      <if test="organ != null">
+        organ,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="verdate != null">
+        verdate,
+      </if>
+      <if test="moditime != null">
+        moditime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null">
+        #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        #{contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="busdate != null">
+        #{busdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organ != null">
+        #{organ,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="verdate != null">
+        #{verdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moditime != null">
+        #{moditime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.CostadjustFathExample" resultType="java.lang.Integer">
+    select count(*) from costadjust_fath
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update costadjust_fath
+    <set>
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appid != null">
+        appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provider != null">
+        provider = #{record.provider,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractid != null">
+        contractid = #{record.contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busdate != null">
+        busdate = #{record.busdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.organ != null">
+        organ = #{record.organ,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verdate != null">
+        verdate = #{record.verdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.moditime != null">
+        moditime = #{record.moditime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update costadjust_fath
+    set t_id = #{record.tId,jdbcType=INTEGER},
+      appid = #{record.appid,jdbcType=VARCHAR},
+      id = #{record.id,jdbcType=VARCHAR},
+      provider = #{record.provider,jdbcType=VARCHAR},
+      contractid = #{record.contractid,jdbcType=VARCHAR},
+      busdate = #{record.busdate,jdbcType=TIMESTAMP},
+      organ = #{record.organ,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      verdate = #{record.verdate,jdbcType=TIMESTAMP},
+      moditime = #{record.moditime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.CostadjustFath">
+    update costadjust_fath
+    <set>
+      <if test="appid != null">
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="provider != null">
+        provider = #{provider,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        contractid = #{contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="busdate != null">
+        busdate = #{busdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organ != null">
+        organ = #{organ,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="verdate != null">
+        verdate = #{verdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moditime != null">
+        moditime = #{moditime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.CostadjustFath">
+    update costadjust_fath
+    set appid = #{appid,jdbcType=VARCHAR},
+      id = #{id,jdbcType=VARCHAR},
+      provider = #{provider,jdbcType=VARCHAR},
+      contractid = #{contractid,jdbcType=VARCHAR},
+      busdate = #{busdate,jdbcType=TIMESTAMP},
+      organ = #{organ,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      verdate = #{verdate,jdbcType=TIMESTAMP},
+      moditime = #{moditime,jdbcType=TIMESTAMP}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+</mapper>

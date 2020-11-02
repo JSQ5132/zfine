@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.SysOrganizeMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.SysOrganize">
+    <id column="F_Id" jdbcType="VARCHAR" property="fId" />
+    <result column="F_ParentId" jdbcType="VARCHAR" property="fParentid" />
+    <result column="F_Layers" jdbcType="INTEGER" property="fLayers" />
+    <result column="F_EnCode" jdbcType="VARCHAR" property="fEncode" />
+    <result column="F_FullName" jdbcType="VARCHAR" property="fFullname" />
+    <result column="F_ShortName" jdbcType="VARCHAR" property="fShortname" />
+    <result column="F_CategoryId" jdbcType="VARCHAR" property="fCategoryid" />
+    <result column="F_ManagerId" jdbcType="VARCHAR" property="fManagerid" />
+    <result column="F_TelePhone" jdbcType="VARCHAR" property="fTelephone" />
+    <result column="F_MobilePhone" jdbcType="VARCHAR" property="fMobilephone" />
+    <result column="F_WeChat" jdbcType="VARCHAR" property="fWechat" />
+    <result column="F_Fax" jdbcType="VARCHAR" property="fFax" />
+    <result column="F_Email" jdbcType="VARCHAR" property="fEmail" />
+    <result column="F_AreaId" jdbcType="VARCHAR" property="fAreaid" />
+    <result column="F_Address" jdbcType="VARCHAR" property="fAddress" />
+    <result column="F_AllowEdit" jdbcType="BIT" property="fAllowedit" />
+    <result column="F_AllowDelete" jdbcType="BIT" property="fAllowdelete" />
+    <result column="F_SortCode" jdbcType="INTEGER" property="fSortcode" />
+    <result column="F_DeleteMark" jdbcType="BIT" property="fDeletemark" />
+    <result column="F_EnabledMark" jdbcType="BIT" property="fEnabledmark" />
+    <result column="F_Description" jdbcType="VARCHAR" property="fDescription" />
+    <result column="F_CreatorTime" jdbcType="TIMESTAMP" property="fCreatortime" />
+    <result column="F_CreatorUserId" jdbcType="VARCHAR" property="fCreatoruserid" />
+    <result column="F_LastModifyTime" jdbcType="TIMESTAMP" property="fLastmodifytime" />
+    <result column="F_LastModifyUserId" jdbcType="VARCHAR" property="fLastmodifyuserid" />
+    <result column="F_DeleteTime" jdbcType="TIMESTAMP" property="fDeletetime" />
+    <result column="F_DeleteUserId" jdbcType="VARCHAR" property="fDeleteuserid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    F_Id, F_ParentId, F_Layers, F_EnCode, F_FullName, F_ShortName, F_CategoryId, F_ManagerId, 
+    F_TelePhone, F_MobilePhone, F_WeChat, F_Fax, F_Email, F_AreaId, F_Address, F_AllowEdit, 
+    F_AllowDelete, F_SortCode, F_DeleteMark, F_EnabledMark, F_Description, F_CreatorTime, 
+    F_CreatorUserId, F_LastModifyTime, F_LastModifyUserId, F_DeleteTime, F_DeleteUserId
+  </sql>
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.SysOrganizeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_organize
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_organize
+    where F_Id = #{fId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_organize
+    where F_Id = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.SysOrganizeExample">
+    delete from sys_organize
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.SysOrganize">
+    insert into sys_organize (F_Id, F_ParentId, F_Layers, 
+      F_EnCode, F_FullName, F_ShortName, 
+      F_CategoryId, F_ManagerId, F_TelePhone, 
+      F_MobilePhone, F_WeChat, F_Fax, 
+      F_Email, F_AreaId, F_Address, 
+      F_AllowEdit, F_AllowDelete, F_SortCode, 
+      F_DeleteMark, F_EnabledMark, F_Description, 
+      F_CreatorTime, F_CreatorUserId, F_LastModifyTime, 
+      F_LastModifyUserId, F_DeleteTime, F_DeleteUserId
+      )
+    values (#{fId,jdbcType=VARCHAR}, #{fParentid,jdbcType=VARCHAR}, #{fLayers,jdbcType=INTEGER}, 
+      #{fEncode,jdbcType=VARCHAR}, #{fFullname,jdbcType=VARCHAR}, #{fShortname,jdbcType=VARCHAR}, 
+      #{fCategoryid,jdbcType=VARCHAR}, #{fManagerid,jdbcType=VARCHAR}, #{fTelephone,jdbcType=VARCHAR}, 
+      #{fMobilephone,jdbcType=VARCHAR}, #{fWechat,jdbcType=VARCHAR}, #{fFax,jdbcType=VARCHAR}, 
+      #{fEmail,jdbcType=VARCHAR}, #{fAreaid,jdbcType=VARCHAR}, #{fAddress,jdbcType=VARCHAR}, 
+      #{fAllowedit,jdbcType=BIT}, #{fAllowdelete,jdbcType=BIT}, #{fSortcode,jdbcType=INTEGER}, 
+      #{fDeletemark,jdbcType=BIT}, #{fEnabledmark,jdbcType=BIT}, #{fDescription,jdbcType=VARCHAR}, 
+      #{fCreatortime,jdbcType=TIMESTAMP}, #{fCreatoruserid,jdbcType=VARCHAR}, #{fLastmodifytime,jdbcType=TIMESTAMP}, 
+      #{fLastmodifyuserid,jdbcType=VARCHAR}, #{fDeletetime,jdbcType=TIMESTAMP}, #{fDeleteuserid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.SysOrganize">
+    insert into sys_organize
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_Id,
+      </if>
+      <if test="fParentid != null">
+        F_ParentId,
+      </if>
+      <if test="fLayers != null">
+        F_Layers,
+      </if>
+      <if test="fEncode != null">
+        F_EnCode,
+      </if>
+      <if test="fFullname != null">
+        F_FullName,
+      </if>
+      <if test="fShortname != null">
+        F_ShortName,
+      </if>
+      <if test="fCategoryid != null">
+        F_CategoryId,
+      </if>
+      <if test="fManagerid != null">
+        F_ManagerId,
+      </if>
+      <if test="fTelephone != null">
+        F_TelePhone,
+      </if>
+      <if test="fMobilephone != null">
+        F_MobilePhone,
+      </if>
+      <if test="fWechat != null">
+        F_WeChat,
+      </if>
+      <if test="fFax != null">
+        F_Fax,
+      </if>
+      <if test="fEmail != null">
+        F_Email,
+      </if>
+      <if test="fAreaid != null">
+        F_AreaId,
+      </if>
+      <if test="fAddress != null">
+        F_Address,
+      </if>
+      <if test="fAllowedit != null">
+        F_AllowEdit,
+      </if>
+      <if test="fAllowdelete != null">
+        F_AllowDelete,
+      </if>
+      <if test="fSortcode != null">
+        F_SortCode,
+      </if>
+      <if test="fDeletemark != null">
+        F_DeleteMark,
+      </if>
+      <if test="fEnabledmark != null">
+        F_EnabledMark,
+      </if>
+      <if test="fDescription != null">
+        F_Description,
+      </if>
+      <if test="fCreatortime != null">
+        F_CreatorTime,
+      </if>
+      <if test="fCreatoruserid != null">
+        F_CreatorUserId,
+      </if>
+      <if test="fLastmodifytime != null">
+        F_LastModifyTime,
+      </if>
+      <if test="fLastmodifyuserid != null">
+        F_LastModifyUserId,
+      </if>
+      <if test="fDeletetime != null">
+        F_DeleteTime,
+      </if>
+      <if test="fDeleteuserid != null">
+        F_DeleteUserId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fParentid != null">
+        #{fParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLayers != null">
+        #{fLayers,jdbcType=INTEGER},
+      </if>
+      <if test="fEncode != null">
+        #{fEncode,jdbcType=VARCHAR},
+      </if>
+      <if test="fFullname != null">
+        #{fFullname,jdbcType=VARCHAR},
+      </if>
+      <if test="fShortname != null">
+        #{fShortname,jdbcType=VARCHAR},
+      </if>
+      <if test="fCategoryid != null">
+        #{fCategoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="fManagerid != null">
+        #{fManagerid,jdbcType=VARCHAR},
+      </if>
+      <if test="fTelephone != null">
+        #{fTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fMobilephone != null">
+        #{fMobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fWechat != null">
+        #{fWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="fFax != null">
+        #{fFax,jdbcType=VARCHAR},
+      </if>
+      <if test="fEmail != null">
+        #{fEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="fAreaid != null">
+        #{fAreaid,jdbcType=VARCHAR},
+      </if>
+      <if test="fAddress != null">
+        #{fAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fAllowedit != null">
+        #{fAllowedit,jdbcType=BIT},
+      </if>
+      <if test="fAllowdelete != null">
+        #{fAllowdelete,jdbcType=BIT},
+      </if>
+      <if test="fSortcode != null">
+        #{fSortcode,jdbcType=INTEGER},
+      </if>
+      <if test="fDeletemark != null">
+        #{fDeletemark,jdbcType=BIT},
+      </if>
+      <if test="fEnabledmark != null">
+        #{fEnabledmark,jdbcType=BIT},
+      </if>
+      <if test="fDescription != null">
+        #{fDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="fCreatortime != null">
+        #{fCreatortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fCreatoruserid != null">
+        #{fCreatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLastmodifytime != null">
+        #{fLastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fLastmodifyuserid != null">
+        #{fLastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeletetime != null">
+        #{fDeletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fDeleteuserid != null">
+        #{fDeleteuserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.SysOrganizeExample" resultType="java.lang.Integer">
+    select count(*) from sys_organize
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_organize
+    <set>
+      <if test="record.fId != null">
+        F_Id = #{record.fId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fParentid != null">
+        F_ParentId = #{record.fParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fLayers != null">
+        F_Layers = #{record.fLayers,jdbcType=INTEGER},
+      </if>
+      <if test="record.fEncode != null">
+        F_EnCode = #{record.fEncode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fFullname != null">
+        F_FullName = #{record.fFullname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fShortname != null">
+        F_ShortName = #{record.fShortname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fCategoryid != null">
+        F_CategoryId = #{record.fCategoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fManagerid != null">
+        F_ManagerId = #{record.fManagerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fTelephone != null">
+        F_TelePhone = #{record.fTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fMobilephone != null">
+        F_MobilePhone = #{record.fMobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fWechat != null">
+        F_WeChat = #{record.fWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fFax != null">
+        F_Fax = #{record.fFax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fEmail != null">
+        F_Email = #{record.fEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fAreaid != null">
+        F_AreaId = #{record.fAreaid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fAddress != null">
+        F_Address = #{record.fAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fAllowedit != null">
+        F_AllowEdit = #{record.fAllowedit,jdbcType=BIT},
+      </if>
+      <if test="record.fAllowdelete != null">
+        F_AllowDelete = #{record.fAllowdelete,jdbcType=BIT},
+      </if>
+      <if test="record.fSortcode != null">
+        F_SortCode = #{record.fSortcode,jdbcType=INTEGER},
+      </if>
+      <if test="record.fDeletemark != null">
+        F_DeleteMark = #{record.fDeletemark,jdbcType=BIT},
+      </if>
+      <if test="record.fEnabledmark != null">
+        F_EnabledMark = #{record.fEnabledmark,jdbcType=BIT},
+      </if>
+      <if test="record.fDescription != null">
+        F_Description = #{record.fDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fCreatortime != null">
+        F_CreatorTime = #{record.fCreatortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fCreatoruserid != null">
+        F_CreatorUserId = #{record.fCreatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fLastmodifytime != null">
+        F_LastModifyTime = #{record.fLastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fLastmodifyuserid != null">
+        F_LastModifyUserId = #{record.fLastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDeletetime != null">
+        F_DeleteTime = #{record.fDeletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fDeleteuserid != null">
+        F_DeleteUserId = #{record.fDeleteuserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_organize
+    set F_Id = #{record.fId,jdbcType=VARCHAR},
+      F_ParentId = #{record.fParentid,jdbcType=VARCHAR},
+      F_Layers = #{record.fLayers,jdbcType=INTEGER},
+      F_EnCode = #{record.fEncode,jdbcType=VARCHAR},
+      F_FullName = #{record.fFullname,jdbcType=VARCHAR},
+      F_ShortName = #{record.fShortname,jdbcType=VARCHAR},
+      F_CategoryId = #{record.fCategoryid,jdbcType=VARCHAR},
+      F_ManagerId = #{record.fManagerid,jdbcType=VARCHAR},
+      F_TelePhone = #{record.fTelephone,jdbcType=VARCHAR},
+      F_MobilePhone = #{record.fMobilephone,jdbcType=VARCHAR},
+      F_WeChat = #{record.fWechat,jdbcType=VARCHAR},
+      F_Fax = #{record.fFax,jdbcType=VARCHAR},
+      F_Email = #{record.fEmail,jdbcType=VARCHAR},
+      F_AreaId = #{record.fAreaid,jdbcType=VARCHAR},
+      F_Address = #{record.fAddress,jdbcType=VARCHAR},
+      F_AllowEdit = #{record.fAllowedit,jdbcType=BIT},
+      F_AllowDelete = #{record.fAllowdelete,jdbcType=BIT},
+      F_SortCode = #{record.fSortcode,jdbcType=INTEGER},
+      F_DeleteMark = #{record.fDeletemark,jdbcType=BIT},
+      F_EnabledMark = #{record.fEnabledmark,jdbcType=BIT},
+      F_Description = #{record.fDescription,jdbcType=VARCHAR},
+      F_CreatorTime = #{record.fCreatortime,jdbcType=TIMESTAMP},
+      F_CreatorUserId = #{record.fCreatoruserid,jdbcType=VARCHAR},
+      F_LastModifyTime = #{record.fLastmodifytime,jdbcType=TIMESTAMP},
+      F_LastModifyUserId = #{record.fLastmodifyuserid,jdbcType=VARCHAR},
+      F_DeleteTime = #{record.fDeletetime,jdbcType=TIMESTAMP},
+      F_DeleteUserId = #{record.fDeleteuserid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.SysOrganize">
+    update sys_organize
+    <set>
+      <if test="fParentid != null">
+        F_ParentId = #{fParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLayers != null">
+        F_Layers = #{fLayers,jdbcType=INTEGER},
+      </if>
+      <if test="fEncode != null">
+        F_EnCode = #{fEncode,jdbcType=VARCHAR},
+      </if>
+      <if test="fFullname != null">
+        F_FullName = #{fFullname,jdbcType=VARCHAR},
+      </if>
+      <if test="fShortname != null">
+        F_ShortName = #{fShortname,jdbcType=VARCHAR},
+      </if>
+      <if test="fCategoryid != null">
+        F_CategoryId = #{fCategoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="fManagerid != null">
+        F_ManagerId = #{fManagerid,jdbcType=VARCHAR},
+      </if>
+      <if test="fTelephone != null">
+        F_TelePhone = #{fTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fMobilephone != null">
+        F_MobilePhone = #{fMobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fWechat != null">
+        F_WeChat = #{fWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="fFax != null">
+        F_Fax = #{fFax,jdbcType=VARCHAR},
+      </if>
+      <if test="fEmail != null">
+        F_Email = #{fEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="fAreaid != null">
+        F_AreaId = #{fAreaid,jdbcType=VARCHAR},
+      </if>
+      <if test="fAddress != null">
+        F_Address = #{fAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fAllowedit != null">
+        F_AllowEdit = #{fAllowedit,jdbcType=BIT},
+      </if>
+      <if test="fAllowdelete != null">
+        F_AllowDelete = #{fAllowdelete,jdbcType=BIT},
+      </if>
+      <if test="fSortcode != null">
+        F_SortCode = #{fSortcode,jdbcType=INTEGER},
+      </if>
+      <if test="fDeletemark != null">
+        F_DeleteMark = #{fDeletemark,jdbcType=BIT},
+      </if>
+      <if test="fEnabledmark != null">
+        F_EnabledMark = #{fEnabledmark,jdbcType=BIT},
+      </if>
+      <if test="fDescription != null">
+        F_Description = #{fDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="fCreatortime != null">
+        F_CreatorTime = #{fCreatortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fCreatoruserid != null">
+        F_CreatorUserId = #{fCreatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLastmodifytime != null">
+        F_LastModifyTime = #{fLastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fLastmodifyuserid != null">
+        F_LastModifyUserId = #{fLastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeletetime != null">
+        F_DeleteTime = #{fDeletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fDeleteuserid != null">
+        F_DeleteUserId = #{fDeleteuserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_Id = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.SysOrganize">
+    update sys_organize
+    set F_ParentId = #{fParentid,jdbcType=VARCHAR},
+      F_Layers = #{fLayers,jdbcType=INTEGER},
+      F_EnCode = #{fEncode,jdbcType=VARCHAR},
+      F_FullName = #{fFullname,jdbcType=VARCHAR},
+      F_ShortName = #{fShortname,jdbcType=VARCHAR},
+      F_CategoryId = #{fCategoryid,jdbcType=VARCHAR},
+      F_ManagerId = #{fManagerid,jdbcType=VARCHAR},
+      F_TelePhone = #{fTelephone,jdbcType=VARCHAR},
+      F_MobilePhone = #{fMobilephone,jdbcType=VARCHAR},
+      F_WeChat = #{fWechat,jdbcType=VARCHAR},
+      F_Fax = #{fFax,jdbcType=VARCHAR},
+      F_Email = #{fEmail,jdbcType=VARCHAR},
+      F_AreaId = #{fAreaid,jdbcType=VARCHAR},
+      F_Address = #{fAddress,jdbcType=VARCHAR},
+      F_AllowEdit = #{fAllowedit,jdbcType=BIT},
+      F_AllowDelete = #{fAllowdelete,jdbcType=BIT},
+      F_SortCode = #{fSortcode,jdbcType=INTEGER},
+      F_DeleteMark = #{fDeletemark,jdbcType=BIT},
+      F_EnabledMark = #{fEnabledmark,jdbcType=BIT},
+      F_Description = #{fDescription,jdbcType=VARCHAR},
+      F_CreatorTime = #{fCreatortime,jdbcType=TIMESTAMP},
+      F_CreatorUserId = #{fCreatoruserid,jdbcType=VARCHAR},
+      F_LastModifyTime = #{fLastmodifytime,jdbcType=TIMESTAMP},
+      F_LastModifyUserId = #{fLastmodifyuserid,jdbcType=VARCHAR},
+      F_DeleteTime = #{fDeletetime,jdbcType=TIMESTAMP},
+      F_DeleteUserId = #{fDeleteuserid,jdbcType=VARCHAR}
+    where F_Id = #{fId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.SendMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.Send">
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="tbname" jdbcType="VARCHAR" property="tbname" />
+    <result column="lastdate" jdbcType="TIMESTAMP" property="lastdate" />
+    <result column="moditime" jdbcType="TIMESTAMP" property="moditime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    t_id, appid, tbname, lastdate, moditime
+  </sql>
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.SendExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from send
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from send
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from send
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.SendExample">
+    delete from send
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.Send">
+    insert into send (t_id, appid, tbname, 
+      lastdate, moditime)
+    values (#{tId,jdbcType=INTEGER}, #{appid,jdbcType=VARCHAR}, #{tbname,jdbcType=VARCHAR}, 
+      #{lastdate,jdbcType=TIMESTAMP}, #{moditime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.Send">
+    insert into send
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="tbname != null">
+        tbname,
+      </if>
+      <if test="lastdate != null">
+        lastdate,
+      </if>
+      <if test="moditime != null">
+        moditime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="tbname != null">
+        #{tbname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastdate != null">
+        #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moditime != null">
+        #{moditime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.SendExample" resultType="java.lang.Integer">
+    select count(*) from send
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update send
+    <set>
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appid != null">
+        appid = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbname != null">
+        tbname = #{record.tbname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastdate != null">
+        lastdate = #{record.lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.moditime != null">
+        moditime = #{record.moditime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update send
+    set t_id = #{record.tId,jdbcType=INTEGER},
+      appid = #{record.appid,jdbcType=VARCHAR},
+      tbname = #{record.tbname,jdbcType=VARCHAR},
+      lastdate = #{record.lastdate,jdbcType=TIMESTAMP},
+      moditime = #{record.moditime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.Send">
+    update send
+    <set>
+      <if test="appid != null">
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="tbname != null">
+        tbname = #{tbname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastdate != null">
+        lastdate = #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moditime != null">
+        moditime = #{moditime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.Send">
+    update send
+    set appid = #{appid,jdbcType=VARCHAR},
+      tbname = #{tbname,jdbcType=VARCHAR},
+      lastdate = #{lastdate,jdbcType=TIMESTAMP},
+      moditime = #{moditime,jdbcType=TIMESTAMP}
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+</mapper>

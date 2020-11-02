@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.PbcattblMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.Pbcattbl">
+    <result column="pbt_tnam" jdbcType="VARCHAR" property="pbtTnam" />
+    <result column="pbt_tid" jdbcType="INTEGER" property="pbtTid" />
+    <result column="pbt_ownr" jdbcType="VARCHAR" property="pbtOwnr" />
+    <result column="pbd_fhgt" jdbcType="INTEGER" property="pbdFhgt" />
+    <result column="pbd_fwgt" jdbcType="INTEGER" property="pbdFwgt" />
+    <result column="pbd_fitl" jdbcType="VARCHAR" property="pbdFitl" />
+    <result column="pbd_funl" jdbcType="VARCHAR" property="pbdFunl" />
+    <result column="pbd_fchr" jdbcType="INTEGER" property="pbdFchr" />
+    <result column="pbd_fptc" jdbcType="INTEGER" property="pbdFptc" />
+    <result column="pbd_ffce" jdbcType="VARCHAR" property="pbdFfce" />
+    <result column="pbh_fhgt" jdbcType="INTEGER" property="pbhFhgt" />
+    <result column="pbh_fwgt" jdbcType="INTEGER" property="pbhFwgt" />
+    <result column="pbh_fitl" jdbcType="VARCHAR" property="pbhFitl" />
+    <result column="pbh_funl" jdbcType="VARCHAR" property="pbhFunl" />
+    <result column="pbh_fchr" jdbcType="INTEGER" property="pbhFchr" />
+    <result column="pbh_fptc" jdbcType="INTEGER" property="pbhFptc" />
+    <result column="pbh_ffce" jdbcType="VARCHAR" property="pbhFfce" />
+    <result column="pbl_fhgt" jdbcType="INTEGER" property="pblFhgt" />
+    <result column="pbl_fwgt" jdbcType="INTEGER" property="pblFwgt" />
+    <result column="pbl_fitl" jdbcType="VARCHAR" property="pblFitl" />
+    <result column="pbl_funl" jdbcType="VARCHAR" property="pblFunl" />
+    <result column="pbl_fchr" jdbcType="INTEGER" property="pblFchr" />
+    <result column="pbl_fptc" jdbcType="INTEGER" property="pblFptc" />
+    <result column="pbl_ffce" jdbcType="VARCHAR" property="pblFfce" />
+    <result column="pbt_cmnt" jdbcType="VARCHAR" property="pbtCmnt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pbt_tnam, pbt_tid, pbt_ownr, pbd_fhgt, pbd_fwgt, pbd_fitl, pbd_funl, pbd_fchr, pbd_fptc, 
+    pbd_ffce, pbh_fhgt, pbh_fwgt, pbh_fitl, pbh_funl, pbh_fchr, pbh_fptc, pbh_ffce, pbl_fhgt, 
+    pbl_fwgt, pbl_fitl, pbl_funl, pbl_fchr, pbl_fptc, pbl_ffce, pbt_cmnt
+  </sql>
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.PbcattblExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pbcattbl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.PbcattblExample">
+    delete from pbcattbl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.Pbcattbl">
+    insert into pbcattbl (pbt_tnam, pbt_tid, pbt_ownr, 
+      pbd_fhgt, pbd_fwgt, pbd_fitl, 
+      pbd_funl, pbd_fchr, pbd_fptc, 
+      pbd_ffce, pbh_fhgt, pbh_fwgt, 
+      pbh_fitl, pbh_funl, pbh_fchr, 
+      pbh_fptc, pbh_ffce, pbl_fhgt, 
+      pbl_fwgt, pbl_fitl, pbl_funl, 
+      pbl_fchr, pbl_fptc, pbl_ffce, 
+      pbt_cmnt)
+    values (#{pbtTnam,jdbcType=VARCHAR}, #{pbtTid,jdbcType=INTEGER}, #{pbtOwnr,jdbcType=VARCHAR}, 
+      #{pbdFhgt,jdbcType=INTEGER}, #{pbdFwgt,jdbcType=INTEGER}, #{pbdFitl,jdbcType=VARCHAR}, 
+      #{pbdFunl,jdbcType=VARCHAR}, #{pbdFchr,jdbcType=INTEGER}, #{pbdFptc,jdbcType=INTEGER}, 
+      #{pbdFfce,jdbcType=VARCHAR}, #{pbhFhgt,jdbcType=INTEGER}, #{pbhFwgt,jdbcType=INTEGER}, 
+      #{pbhFitl,jdbcType=VARCHAR}, #{pbhFunl,jdbcType=VARCHAR}, #{pbhFchr,jdbcType=INTEGER}, 
+      #{pbhFptc,jdbcType=INTEGER}, #{pbhFfce,jdbcType=VARCHAR}, #{pblFhgt,jdbcType=INTEGER}, 
+      #{pblFwgt,jdbcType=INTEGER}, #{pblFitl,jdbcType=VARCHAR}, #{pblFunl,jdbcType=VARCHAR}, 
+      #{pblFchr,jdbcType=INTEGER}, #{pblFptc,jdbcType=INTEGER}, #{pblFfce,jdbcType=VARCHAR}, 
+      #{pbtCmnt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.Pbcattbl">
+    insert into pbcattbl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pbtTnam != null">
+        pbt_tnam,
+      </if>
+      <if test="pbtTid != null">
+        pbt_tid,
+      </if>
+      <if test="pbtOwnr != null">
+        pbt_ownr,
+      </if>
+      <if test="pbdFhgt != null">
+        pbd_fhgt,
+      </if>
+      <if test="pbdFwgt != null">
+        pbd_fwgt,
+      </if>
+      <if test="pbdFitl != null">
+        pbd_fitl,
+      </if>
+      <if test="pbdFunl != null">
+        pbd_funl,
+      </if>
+      <if test="pbdFchr != null">
+        pbd_fchr,
+      </if>
+      <if test="pbdFptc != null">
+        pbd_fptc,
+      </if>
+      <if test="pbdFfce != null">
+        pbd_ffce,
+      </if>
+      <if test="pbhFhgt != null">
+        pbh_fhgt,
+      </if>
+      <if test="pbhFwgt != null">
+        pbh_fwgt,
+      </if>
+      <if test="pbhFitl != null">
+        pbh_fitl,
+      </if>
+      <if test="pbhFunl != null">
+        pbh_funl,
+      </if>
+      <if test="pbhFchr != null">
+        pbh_fchr,
+      </if>
+      <if test="pbhFptc != null">
+        pbh_fptc,
+      </if>
+      <if test="pbhFfce != null">
+        pbh_ffce,
+      </if>
+      <if test="pblFhgt != null">
+        pbl_fhgt,
+      </if>
+      <if test="pblFwgt != null">
+        pbl_fwgt,
+      </if>
+      <if test="pblFitl != null">
+        pbl_fitl,
+      </if>
+      <if test="pblFunl != null">
+        pbl_funl,
+      </if>
+      <if test="pblFchr != null">
+        pbl_fchr,
+      </if>
+      <if test="pblFptc != null">
+        pbl_fptc,
+      </if>
+      <if test="pblFfce != null">
+        pbl_ffce,
+      </if>
+      <if test="pbtCmnt != null">
+        pbt_cmnt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pbtTnam != null">
+        #{pbtTnam,jdbcType=VARCHAR},
+      </if>
+      <if test="pbtTid != null">
+        #{pbtTid,jdbcType=INTEGER},
+      </if>
+      <if test="pbtOwnr != null">
+        #{pbtOwnr,jdbcType=VARCHAR},
+      </if>
+      <if test="pbdFhgt != null">
+        #{pbdFhgt,jdbcType=INTEGER},
+      </if>
+      <if test="pbdFwgt != null">
+        #{pbdFwgt,jdbcType=INTEGER},
+      </if>
+      <if test="pbdFitl != null">
+        #{pbdFitl,jdbcType=VARCHAR},
+      </if>
+      <if test="pbdFunl != null">
+        #{pbdFunl,jdbcType=VARCHAR},
+      </if>
+      <if test="pbdFchr != null">
+        #{pbdFchr,jdbcType=INTEGER},
+      </if>
+      <if test="pbdFptc != null">
+        #{pbdFptc,jdbcType=INTEGER},
+      </if>
+      <if test="pbdFfce != null">
+        #{pbdFfce,jdbcType=VARCHAR},
+      </if>
+      <if test="pbhFhgt != null">
+        #{pbhFhgt,jdbcType=INTEGER},
+      </if>
+      <if test="pbhFwgt != null">
+        #{pbhFwgt,jdbcType=INTEGER},
+      </if>
+      <if test="pbhFitl != null">
+        #{pbhFitl,jdbcType=VARCHAR},
+      </if>
+      <if test="pbhFunl != null">
+        #{pbhFunl,jdbcType=VARCHAR},
+      </if>
+      <if test="pbhFchr != null">
+        #{pbhFchr,jdbcType=INTEGER},
+      </if>
+      <if test="pbhFptc != null">
+        #{pbhFptc,jdbcType=INTEGER},
+      </if>
+      <if test="pbhFfce != null">
+        #{pbhFfce,jdbcType=VARCHAR},
+      </if>
+      <if test="pblFhgt != null">
+        #{pblFhgt,jdbcType=INTEGER},
+      </if>
+      <if test="pblFwgt != null">
+        #{pblFwgt,jdbcType=INTEGER},
+      </if>
+      <if test="pblFitl != null">
+        #{pblFitl,jdbcType=VARCHAR},
+      </if>
+      <if test="pblFunl != null">
+        #{pblFunl,jdbcType=VARCHAR},
+      </if>
+      <if test="pblFchr != null">
+        #{pblFchr,jdbcType=INTEGER},
+      </if>
+      <if test="pblFptc != null">
+        #{pblFptc,jdbcType=INTEGER},
+      </if>
+      <if test="pblFfce != null">
+        #{pblFfce,jdbcType=VARCHAR},
+      </if>
+      <if test="pbtCmnt != null">
+        #{pbtCmnt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.PbcattblExample" resultType="java.lang.Integer">
+    select count(*) from pbcattbl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pbcattbl
+    <set>
+      <if test="record.pbtTnam != null">
+        pbt_tnam = #{record.pbtTnam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pbtTid != null">
+        pbt_tid = #{record.pbtTid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pbtOwnr != null">
+        pbt_ownr = #{record.pbtOwnr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pbdFhgt != null">
+        pbd_fhgt = #{record.pbdFhgt,jdbcType=INTEGER},
+      </if>
+      <if test="record.pbdFwgt != null">
+        pbd_fwgt = #{record.pbdFwgt,jdbcType=INTEGER},
+      </if>
+      <if test="record.pbdFitl != null">
+        pbd_fitl = #{record.pbdFitl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pbdFunl != null">
+        pbd_funl = #{record.pbdFunl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pbdFchr != null">
+        pbd_fchr = #{record.pbdFchr,jdbcType=INTEGER},
+      </if>
+      <if test="record.pbdFptc != null">
+        pbd_fptc = #{record.pbdFptc,jdbcType=INTEGER},
+      </if>
+      <if test="record.pbdFfce != null">
+        pbd_ffce = #{record.pbdFfce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pbhFhgt != null">
+        pbh_fhgt = #{record.pbhFhgt,jdbcType=INTEGER},
+      </if>
+      <if test="record.pbhFwgt != null">
+        pbh_fwgt = #{record.pbhFwgt,jdbcType=INTEGER},
+      </if>
+      <if test="record.pbhFitl != null">
+        pbh_fitl = #{record.pbhFitl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pbhFunl != null">
+        pbh_funl = #{record.pbhFunl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pbhFchr != null">
+        pbh_fchr = #{record.pbhFchr,jdbcType=INTEGER},
+      </if>
+      <if test="record.pbhFptc != null">
+        pbh_fptc = #{record.pbhFptc,jdbcType=INTEGER},
+      </if>
+      <if test="record.pbhFfce != null">
+        pbh_ffce = #{record.pbhFfce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pblFhgt != null">
+        pbl_fhgt = #{record.pblFhgt,jdbcType=INTEGER},
+      </if>
+      <if test="record.pblFwgt != null">
+        pbl_fwgt = #{record.pblFwgt,jdbcType=INTEGER},
+      </if>
+      <if test="record.pblFitl != null">
+        pbl_fitl = #{record.pblFitl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pblFunl != null">
+        pbl_funl = #{record.pblFunl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pblFchr != null">
+        pbl_fchr = #{record.pblFchr,jdbcType=INTEGER},
+      </if>
+      <if test="record.pblFptc != null">
+        pbl_fptc = #{record.pblFptc,jdbcType=INTEGER},
+      </if>
+      <if test="record.pblFfce != null">
+        pbl_ffce = #{record.pblFfce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pbtCmnt != null">
+        pbt_cmnt = #{record.pbtCmnt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pbcattbl
+    set pbt_tnam = #{record.pbtTnam,jdbcType=VARCHAR},
+      pbt_tid = #{record.pbtTid,jdbcType=INTEGER},
+      pbt_ownr = #{record.pbtOwnr,jdbcType=VARCHAR},
+      pbd_fhgt = #{record.pbdFhgt,jdbcType=INTEGER},
+      pbd_fwgt = #{record.pbdFwgt,jdbcType=INTEGER},
+      pbd_fitl = #{record.pbdFitl,jdbcType=VARCHAR},
+      pbd_funl = #{record.pbdFunl,jdbcType=VARCHAR},
+      pbd_fchr = #{record.pbdFchr,jdbcType=INTEGER},
+      pbd_fptc = #{record.pbdFptc,jdbcType=INTEGER},
+      pbd_ffce = #{record.pbdFfce,jdbcType=VARCHAR},
+      pbh_fhgt = #{record.pbhFhgt,jdbcType=INTEGER},
+      pbh_fwgt = #{record.pbhFwgt,jdbcType=INTEGER},
+      pbh_fitl = #{record.pbhFitl,jdbcType=VARCHAR},
+      pbh_funl = #{record.pbhFunl,jdbcType=VARCHAR},
+      pbh_fchr = #{record.pbhFchr,jdbcType=INTEGER},
+      pbh_fptc = #{record.pbhFptc,jdbcType=INTEGER},
+      pbh_ffce = #{record.pbhFfce,jdbcType=VARCHAR},
+      pbl_fhgt = #{record.pblFhgt,jdbcType=INTEGER},
+      pbl_fwgt = #{record.pblFwgt,jdbcType=INTEGER},
+      pbl_fitl = #{record.pblFitl,jdbcType=VARCHAR},
+      pbl_funl = #{record.pblFunl,jdbcType=VARCHAR},
+      pbl_fchr = #{record.pblFchr,jdbcType=INTEGER},
+      pbl_fptc = #{record.pblFptc,jdbcType=INTEGER},
+      pbl_ffce = #{record.pblFfce,jdbcType=VARCHAR},
+      pbt_cmnt = #{record.pbtCmnt,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

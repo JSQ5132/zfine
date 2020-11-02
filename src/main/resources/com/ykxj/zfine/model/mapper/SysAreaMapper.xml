@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.SysAreaMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.SysArea">
+    <id column="F_Id" jdbcType="VARCHAR" property="fId" />
+    <result column="F_ParentId" jdbcType="VARCHAR" property="fParentid" />
+    <result column="F_Layers" jdbcType="INTEGER" property="fLayers" />
+    <result column="F_EnCode" jdbcType="VARCHAR" property="fEncode" />
+    <result column="F_FullName" jdbcType="VARCHAR" property="fFullname" />
+    <result column="F_SimpleSpelling" jdbcType="VARCHAR" property="fSimplespelling" />
+    <result column="F_SortCode" jdbcType="INTEGER" property="fSortcode" />
+    <result column="F_DeleteMark" jdbcType="BIT" property="fDeletemark" />
+    <result column="F_EnabledMark" jdbcType="BIT" property="fEnabledmark" />
+    <result column="F_Description" jdbcType="VARCHAR" property="fDescription" />
+    <result column="F_CreatorTime" jdbcType="TIMESTAMP" property="fCreatortime" />
+    <result column="F_CreatorUserId" jdbcType="VARCHAR" property="fCreatoruserid" />
+    <result column="F_LastModifyTime" jdbcType="TIMESTAMP" property="fLastmodifytime" />
+    <result column="F_LastModifyUserId" jdbcType="VARCHAR" property="fLastmodifyuserid" />
+    <result column="F_DeleteTime" jdbcType="TIMESTAMP" property="fDeletetime" />
+    <result column="F_DeleteUserId" jdbcType="VARCHAR" property="fDeleteuserid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    F_Id, F_ParentId, F_Layers, F_EnCode, F_FullName, F_SimpleSpelling, F_SortCode, F_DeleteMark, 
+    F_EnabledMark, F_Description, F_CreatorTime, F_CreatorUserId, F_LastModifyTime, F_LastModifyUserId, 
+    F_DeleteTime, F_DeleteUserId
+  </sql>
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.SysAreaExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_area
+    where F_Id = #{fId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_area
+    where F_Id = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.SysAreaExample">
+    delete from sys_area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.SysArea">
+    insert into sys_area (F_Id, F_ParentId, F_Layers, 
+      F_EnCode, F_FullName, F_SimpleSpelling, 
+      F_SortCode, F_DeleteMark, F_EnabledMark, 
+      F_Description, F_CreatorTime, F_CreatorUserId, 
+      F_LastModifyTime, F_LastModifyUserId, F_DeleteTime, 
+      F_DeleteUserId)
+    values (#{fId,jdbcType=VARCHAR}, #{fParentid,jdbcType=VARCHAR}, #{fLayers,jdbcType=INTEGER}, 
+      #{fEncode,jdbcType=VARCHAR}, #{fFullname,jdbcType=VARCHAR}, #{fSimplespelling,jdbcType=VARCHAR}, 
+      #{fSortcode,jdbcType=INTEGER}, #{fDeletemark,jdbcType=BIT}, #{fEnabledmark,jdbcType=BIT}, 
+      #{fDescription,jdbcType=VARCHAR}, #{fCreatortime,jdbcType=TIMESTAMP}, #{fCreatoruserid,jdbcType=VARCHAR}, 
+      #{fLastmodifytime,jdbcType=TIMESTAMP}, #{fLastmodifyuserid,jdbcType=VARCHAR}, #{fDeletetime,jdbcType=TIMESTAMP}, 
+      #{fDeleteuserid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.SysArea">
+    insert into sys_area
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_Id,
+      </if>
+      <if test="fParentid != null">
+        F_ParentId,
+      </if>
+      <if test="fLayers != null">
+        F_Layers,
+      </if>
+      <if test="fEncode != null">
+        F_EnCode,
+      </if>
+      <if test="fFullname != null">
+        F_FullName,
+      </if>
+      <if test="fSimplespelling != null">
+        F_SimpleSpelling,
+      </if>
+      <if test="fSortcode != null">
+        F_SortCode,
+      </if>
+      <if test="fDeletemark != null">
+        F_DeleteMark,
+      </if>
+      <if test="fEnabledmark != null">
+        F_EnabledMark,
+      </if>
+      <if test="fDescription != null">
+        F_Description,
+      </if>
+      <if test="fCreatortime != null">
+        F_CreatorTime,
+      </if>
+      <if test="fCreatoruserid != null">
+        F_CreatorUserId,
+      </if>
+      <if test="fLastmodifytime != null">
+        F_LastModifyTime,
+      </if>
+      <if test="fLastmodifyuserid != null">
+        F_LastModifyUserId,
+      </if>
+      <if test="fDeletetime != null">
+        F_DeleteTime,
+      </if>
+      <if test="fDeleteuserid != null">
+        F_DeleteUserId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fParentid != null">
+        #{fParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLayers != null">
+        #{fLayers,jdbcType=INTEGER},
+      </if>
+      <if test="fEncode != null">
+        #{fEncode,jdbcType=VARCHAR},
+      </if>
+      <if test="fFullname != null">
+        #{fFullname,jdbcType=VARCHAR},
+      </if>
+      <if test="fSimplespelling != null">
+        #{fSimplespelling,jdbcType=VARCHAR},
+      </if>
+      <if test="fSortcode != null">
+        #{fSortcode,jdbcType=INTEGER},
+      </if>
+      <if test="fDeletemark != null">
+        #{fDeletemark,jdbcType=BIT},
+      </if>
+      <if test="fEnabledmark != null">
+        #{fEnabledmark,jdbcType=BIT},
+      </if>
+      <if test="fDescription != null">
+        #{fDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="fCreatortime != null">
+        #{fCreatortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fCreatoruserid != null">
+        #{fCreatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLastmodifytime != null">
+        #{fLastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fLastmodifyuserid != null">
+        #{fLastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeletetime != null">
+        #{fDeletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fDeleteuserid != null">
+        #{fDeleteuserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.SysAreaExample" resultType="java.lang.Integer">
+    select count(*) from sys_area
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_area
+    <set>
+      <if test="record.fId != null">
+        F_Id = #{record.fId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fParentid != null">
+        F_ParentId = #{record.fParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fLayers != null">
+        F_Layers = #{record.fLayers,jdbcType=INTEGER},
+      </if>
+      <if test="record.fEncode != null">
+        F_EnCode = #{record.fEncode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fFullname != null">
+        F_FullName = #{record.fFullname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fSimplespelling != null">
+        F_SimpleSpelling = #{record.fSimplespelling,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fSortcode != null">
+        F_SortCode = #{record.fSortcode,jdbcType=INTEGER},
+      </if>
+      <if test="record.fDeletemark != null">
+        F_DeleteMark = #{record.fDeletemark,jdbcType=BIT},
+      </if>
+      <if test="record.fEnabledmark != null">
+        F_EnabledMark = #{record.fEnabledmark,jdbcType=BIT},
+      </if>
+      <if test="record.fDescription != null">
+        F_Description = #{record.fDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fCreatortime != null">
+        F_CreatorTime = #{record.fCreatortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fCreatoruserid != null">
+        F_CreatorUserId = #{record.fCreatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fLastmodifytime != null">
+        F_LastModifyTime = #{record.fLastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fLastmodifyuserid != null">
+        F_LastModifyUserId = #{record.fLastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDeletetime != null">
+        F_DeleteTime = #{record.fDeletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fDeleteuserid != null">
+        F_DeleteUserId = #{record.fDeleteuserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_area
+    set F_Id = #{record.fId,jdbcType=VARCHAR},
+      F_ParentId = #{record.fParentid,jdbcType=VARCHAR},
+      F_Layers = #{record.fLayers,jdbcType=INTEGER},
+      F_EnCode = #{record.fEncode,jdbcType=VARCHAR},
+      F_FullName = #{record.fFullname,jdbcType=VARCHAR},
+      F_SimpleSpelling = #{record.fSimplespelling,jdbcType=VARCHAR},
+      F_SortCode = #{record.fSortcode,jdbcType=INTEGER},
+      F_DeleteMark = #{record.fDeletemark,jdbcType=BIT},
+      F_EnabledMark = #{record.fEnabledmark,jdbcType=BIT},
+      F_Description = #{record.fDescription,jdbcType=VARCHAR},
+      F_CreatorTime = #{record.fCreatortime,jdbcType=TIMESTAMP},
+      F_CreatorUserId = #{record.fCreatoruserid,jdbcType=VARCHAR},
+      F_LastModifyTime = #{record.fLastmodifytime,jdbcType=TIMESTAMP},
+      F_LastModifyUserId = #{record.fLastmodifyuserid,jdbcType=VARCHAR},
+      F_DeleteTime = #{record.fDeletetime,jdbcType=TIMESTAMP},
+      F_DeleteUserId = #{record.fDeleteuserid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.SysArea">
+    update sys_area
+    <set>
+      <if test="fParentid != null">
+        F_ParentId = #{fParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLayers != null">
+        F_Layers = #{fLayers,jdbcType=INTEGER},
+      </if>
+      <if test="fEncode != null">
+        F_EnCode = #{fEncode,jdbcType=VARCHAR},
+      </if>
+      <if test="fFullname != null">
+        F_FullName = #{fFullname,jdbcType=VARCHAR},
+      </if>
+      <if test="fSimplespelling != null">
+        F_SimpleSpelling = #{fSimplespelling,jdbcType=VARCHAR},
+      </if>
+      <if test="fSortcode != null">
+        F_SortCode = #{fSortcode,jdbcType=INTEGER},
+      </if>
+      <if test="fDeletemark != null">
+        F_DeleteMark = #{fDeletemark,jdbcType=BIT},
+      </if>
+      <if test="fEnabledmark != null">
+        F_EnabledMark = #{fEnabledmark,jdbcType=BIT},
+      </if>
+      <if test="fDescription != null">
+        F_Description = #{fDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="fCreatortime != null">
+        F_CreatorTime = #{fCreatortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fCreatoruserid != null">
+        F_CreatorUserId = #{fCreatoruserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLastmodifytime != null">
+        F_LastModifyTime = #{fLastmodifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fLastmodifyuserid != null">
+        F_LastModifyUserId = #{fLastmodifyuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeletetime != null">
+        F_DeleteTime = #{fDeletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fDeleteuserid != null">
+        F_DeleteUserId = #{fDeleteuserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_Id = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.SysArea">
+    update sys_area
+    set F_ParentId = #{fParentid,jdbcType=VARCHAR},
+      F_Layers = #{fLayers,jdbcType=INTEGER},
+      F_EnCode = #{fEncode,jdbcType=VARCHAR},
+      F_FullName = #{fFullname,jdbcType=VARCHAR},
+      F_SimpleSpelling = #{fSimplespelling,jdbcType=VARCHAR},
+      F_SortCode = #{fSortcode,jdbcType=INTEGER},
+      F_DeleteMark = #{fDeletemark,jdbcType=BIT},
+      F_EnabledMark = #{fEnabledmark,jdbcType=BIT},
+      F_Description = #{fDescription,jdbcType=VARCHAR},
+      F_CreatorTime = #{fCreatortime,jdbcType=TIMESTAMP},
+      F_CreatorUserId = #{fCreatoruserid,jdbcType=VARCHAR},
+      F_LastModifyTime = #{fLastmodifytime,jdbcType=TIMESTAMP},
+      F_LastModifyUserId = #{fLastmodifyuserid,jdbcType=VARCHAR},
+      F_DeleteTime = #{fDeletetime,jdbcType=TIMESTAMP},
+      F_DeleteUserId = #{fDeleteuserid,jdbcType=VARCHAR}
+    where F_Id = #{fId,jdbcType=VARCHAR}
+  </update>
+</mapper>
