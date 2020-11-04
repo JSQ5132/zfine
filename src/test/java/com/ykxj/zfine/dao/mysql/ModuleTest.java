@@ -1,17 +1,16 @@
 package com.ykxj.zfine.dao.mysql;
 
-import cn.hutool.json.JSON;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
-import com.ykxj.zfine.model.SysModule;
-import com.ykxj.zfine.model.dto.Modultree;
+
+
+import com.ykxj.zfine.dao.clickhouse.UactMapper;
+import com.ykxj.zfine.model.clickhouse.UactExample;
+import com.ykxj.zfine.model.mysql.SysModule;
+import com.ykxj.zfine.model.mysql.SysModuleExample;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ import java.util.List;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class ModuleTest {
-    @Autowired
+    /*@Autowired
     SysModuleMapper sysModuleMapper;
 
 
@@ -45,6 +44,24 @@ public class ModuleTest {
         SysModule sysModule = sysModuleMapper.selectByPrimaryKey("462027E0-0848-41DD-BCC3-025DCAE65555");
         System.out.println(sysModule.toString());
     }
+*/
 
+    @Autowired
+    UactMapper uactMapper;
+
+//    @Autowired
+//    SysModuleMapper sysModuleMapper;
+
+    @Test
+    public void getModul(){
+        int i = uactMapper.countByExample(new UactExample());
+        System.out.println(i);
+
+
+
+//        SysModule sysModule = sysModuleMapper.selectByPrimaryKey("");
+//        int i1 = sysModuleMapper.countByExample(new SysModuleExample());
+//        System.out.println(i1);
+    }
 
 }

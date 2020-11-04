@@ -77,18 +77,6 @@
             <version>5.3.10</version>
         </dependency>
 
-        <!--&lt;!&ndash;Swagger-UI API文档生产工具&ndash;&gt;
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.7.0</version>
-        </dependency>-->
-
         <!--springfox swagger官方Starter, SpringFox是Spring Framework的Swagger集成-->
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter -->
         <dependency>
@@ -97,6 +85,13 @@
             <version>3.0.0</version>
         </dependency>
 
+        <!-- clickhouse -jdbc 驱动 -->
+        <!-- https://mvnrepository.com/artifact/ru.yandex.clickhouse/clickhouse-jdbc -->
+        <dependency>
+            <groupId>ru.yandex.clickhouse</groupId>
+            <artifactId>clickhouse-jdbc</artifactId>
+            <version>0.2.4</version>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
