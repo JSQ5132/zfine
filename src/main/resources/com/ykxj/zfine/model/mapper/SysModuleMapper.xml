@@ -27,6 +27,47 @@
     <result column="F_DeleteUserId" jdbcType="VARCHAR" property="fDeleteuserid" />
     <result column="edition" jdbcType="VARCHAR" property="edition" />
   </resultMap>
+
+  <resultMap id="BaseResultMapTree" type="com.ykxj.zfine.model.dto.Modultree">
+    <id column="F_Id" jdbcType="VARCHAR" property="fId" />
+    <result column="F_ParentId" jdbcType="VARCHAR" property="fParentid" />
+    <result column="F_Layers" jdbcType="INTEGER" property="fLayers" />
+    <result column="F_EnCode" jdbcType="VARCHAR" property="fEncode" />
+    <result column="F_FullName" jdbcType="VARCHAR" property="fFullname" />
+    <result column="F_Icon" jdbcType="VARCHAR" property="fIcon" />
+    <result column="F_UrlAddress" jdbcType="VARCHAR" property="fUrladdress" />
+    <result column="F_Target" jdbcType="VARCHAR" property="fTarget" />
+    <result column="F_IsMenu" jdbcType="BIT" property="fIsmenu" />
+    <result column="F_IsExpand" jdbcType="BIT" property="fIsexpand" />
+    <result column="F_IsPublic" jdbcType="BIT" property="fIspublic" />
+    <result column="F_AllowEdit" jdbcType="BIT" property="fAllowedit" />
+    <result column="F_AllowDelete" jdbcType="BIT" property="fAllowdelete" />
+    <result column="F_SortCode" jdbcType="INTEGER" property="fSortcode" />
+    <result column="F_DeleteMark" jdbcType="BIT" property="fDeletemark" />
+    <result column="F_EnabledMark" jdbcType="BIT" property="fEnabledmark" />
+    <result column="F_Description" jdbcType="VARCHAR" property="fDescription" />
+    <result column="F_CreatorTime" jdbcType="TIMESTAMP" property="fCreatortime" />
+    <result column="F_CreatorUserId" jdbcType="VARCHAR" property="fCreatoruserid" />
+    <result column="F_LastModifyTime" jdbcType="TIMESTAMP" property="fLastmodifytime" />
+    <result column="F_LastModifyUserId" jdbcType="VARCHAR" property="fLastmodifyuserid" />
+    <result column="F_DeleteTime" jdbcType="TIMESTAMP" property="fDeletetime" />
+    <result column="F_DeleteUserId" jdbcType="VARCHAR" property="fDeleteuserid" />
+    <result column="edition" jdbcType="VARCHAR" property="edition" />
+
+    <collection property="menulist" select="getMenu" column="F_Id">
+
+    </collection>
+  </resultMap>
+
+
+  <select id="BaseResultMapTree" resultMap="BaseResultMapTree">
+         select * from sys_module where F_ParentId = 0
+  </select>
+
+  <select id="getMenu" resultMap="BaseResultMap">
+      select * from sys_module where F_ParentId = #{F_Id}
+  </select>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
