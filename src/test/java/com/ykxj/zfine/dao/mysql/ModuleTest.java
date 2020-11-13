@@ -49,8 +49,8 @@ public class ModuleTest {
     @Autowired
     UactMapper uactMapper;
 
-//    @Autowired
-//    SysModuleMapper sysModuleMapper;
+    @Autowired
+    SysModuleMapper sysModuleMapper;
 
     @Test
     public void getModul(){
@@ -59,9 +59,9 @@ public class ModuleTest {
 
 
 
-//        SysModule sysModule = sysModuleMapper.selectByPrimaryKey("");
-//        int i1 = sysModuleMapper.countByExample(new SysModuleExample());
-//        System.out.println(i1);
+        SysModule sysModule = sysModuleMapper.selectByPrimaryKey("");
+        int i1 = sysModuleMapper.countByExample(new SysModuleExample());
+        System.out.println(i1);
     }
 
 }

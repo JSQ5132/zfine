@@ -29,7 +29,7 @@ public class MybatisClickHosueConfig {
         factoryBean.setDataSource(clickhouse); // clickhouse
 
         factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
-        .getResources("classpath*:mapper/clickhouse/*.xml"));
+        .getResources("classpath*:com/**/mapper/clickhouse/*.xml"));
 
         return factoryBean.getObject();
     }
@@ -41,7 +41,7 @@ public class MybatisClickHosueConfig {
     }
 
     @Bean
-    public PlatformTransactionManager txManager(@Qualifier("clickhouse") DataSource dataSource) {
+    public PlatformTransactionManager txManagerClickHouse(@Qualifier("clickhouse") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
