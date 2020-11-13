@@ -32,19 +32,19 @@ spring:
       jdbc-url: jdbc:clickhouse://localhost:8123/test
       username: default
       password: root
-#      type: com.alibaba.druid.pool.DruidDataSource
-#      driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
-#      druid:
-#        initial-size: 5
-#        min-idle: 5
-#        max-active: 20
-#        max-wait: 60000
-#        time-between-eviction-runs-millis: 60000
-#        min-evictable-idle-time-millis: 300000
-#        test-while-idle: true
-#        validation-query: select 1
-#        pool-prepared-statements: true
-#        max-pool-prepared-statement-per-connection-size: 20
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
+      druid:
+        initial-size: 5
+        min-idle: 5
+        max-active: 20
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        test-while-idle: true
+        validation-query: select 1
+        pool-prepared-statements: true
+        max-pool-prepared-statement-per-connection-size: 20
 
 
 

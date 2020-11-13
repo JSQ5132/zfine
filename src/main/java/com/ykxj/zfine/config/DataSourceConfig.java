@@ -10,6 +10,11 @@ import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 
+/**
+ * @author JiangShengQiang
+ * @date 2020/11/13 15:42
+ * @desc 数据源配置类，指定MySQL数据源和clickhouse数据源
+ */
 @Configuration
 public class DataSourceConfig {
 

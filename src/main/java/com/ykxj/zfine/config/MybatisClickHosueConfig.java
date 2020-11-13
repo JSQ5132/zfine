@@ -14,7 +14,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
-
+/**
+ * @author JiangShengQiang
+ * @date 2020/11/13 15:53
+ * @desc Mybatis的click house数据源配置
+ */
 @Configuration
 @MapperScan(basePackages = {"com.ykxj.zfine.dao.clickhouse"}, sqlSessionFactoryRef = "sqlSessionFactoryClickHouse")
 public class MybatisClickHosueConfig {

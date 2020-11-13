@@ -12,7 +12,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * @author JiangShengQiang
- * @date 2020/11/2 14:50
+ * @date 2020/11/12 14:50
  * @desc Swagger2API文档的配置
  *
  */

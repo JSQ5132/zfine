@@ -8,14 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
-
+/**
+ * @author JiangShengQiang
+ * @date 2020/11/13 15:46
+ * @desc Mybatis的MySQL数据源配置
+ */
 @Configuration
 @MapperScan(basePackages = {"com.ykxj.zfine.dao.mysql"}, sqlSessionFactoryRef = "sqlSessionFactoryMysql")
 public class MybatisMySQLConfig {

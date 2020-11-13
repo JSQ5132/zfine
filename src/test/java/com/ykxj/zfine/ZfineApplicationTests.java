@@ -24,7 +24,7 @@ class ZfineApplicationTests {
     void contextLoads() {
         List<String> warnings = new ArrayList<String>();
         boolean overwrite = true;
-        String genCfg = "src/main/resources/generatorConfig.xml";
+        String genCfg = "src/main/resources/generatorConfig-MySQL.xml";
         File configFile = new File(genCfg);
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = null;
