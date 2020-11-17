@@ -7,7 +7,7 @@ spring:
   datasource:
     # MySQL数据源配置
     mysql:
-      jdbc-url: jdbc:mysql://localhost:3306/zfine_data?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      jdbc-url: jdbc:mysql://localhost:3306/zfine_java?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
       username: root
       password: root
       # 使用druid数据源

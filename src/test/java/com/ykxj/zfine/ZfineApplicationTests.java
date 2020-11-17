@@ -20,6 +20,10 @@ import java.util.List;
 @SpringBootTest
 class ZfineApplicationTests {
 
+
+    /**
+     * MySQL mapper接口生成测试类
+     */
     @Test
     void contextLoads() {
         List<String> warnings = new ArrayList<String>();
@@ -54,6 +58,9 @@ class ZfineApplicationTests {
     }
 
 
+    /**
+     * clickhouse mapper接口生成测试类
+     */
     @Test
     void contextLoadClickHouse() {
         List<String> warnings = new ArrayList<String>();

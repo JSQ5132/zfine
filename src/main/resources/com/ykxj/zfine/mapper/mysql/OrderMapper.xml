@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.mysql.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="company_appid" jdbcType="VARCHAR" property="companyAppid" />
+    <result column="provider_code" jdbcType="VARCHAR" property="providerCode" />
+    <result column="store_id" jdbcType="BIGINT" property="storeId" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="bus_date" jdbcType="DATE" property="busDate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="record_time" jdbcType="TIMESTAMP" property="recordTime" />
+    <result column="mark_time" jdbcType="TIMESTAMP" property="markTime" />
+    <result column="verifier" jdbcType="VARCHAR" property="verifier" />
+    <result column="print_count" jdbcType="INTEGER" property="printCount" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, company_appid, provider_code, store_id, number, create_time, bus_date, remark, 
+    operator, record_time, mark_time, verifier, print_count, state, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.mysql.OrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.mysql.OrderExample">
+    delete from t_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.mysql.Order">
+    insert into t_order (id, company_appid, provider_code, 
+      store_id, number, create_time, 
+      bus_date, remark, operator, 
+      record_time, mark_time, verifier, 
+      print_count, state, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{companyAppid,jdbcType=VARCHAR}, #{providerCode,jdbcType=VARCHAR}, 
+      #{storeId,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{busDate,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{recordTime,jdbcType=TIMESTAMP}, #{markTime,jdbcType=TIMESTAMP}, #{verifier,jdbcType=VARCHAR}, 
+      #{printCount,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.mysql.Order">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="companyAppid != null">
+        company_appid,
+      </if>
+      <if test="providerCode != null">
+        provider_code,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="busDate != null">
+        bus_date,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+      <if test="markTime != null">
+        mark_time,
+      </if>
+      <if test="verifier != null">
+        verifier,
+      </if>
+      <if test="printCount != null">
+        print_count,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="companyAppid != null">
+        #{companyAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="providerCode != null">
+        #{providerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="busDate != null">
+        #{busDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="markTime != null">
+        #{markTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifier != null">
+        #{verifier,jdbcType=VARCHAR},
+      </if>
+      <if test="printCount != null">
+        #{printCount,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.mysql.OrderExample" resultType="java.lang.Integer">
+    select count(*) from t_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_order
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.companyAppid != null">
+        company_appid = #{record.companyAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.providerCode != null">
+        provider_code = #{record.providerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeId != null">
+        store_id = #{record.storeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.busDate != null">
+        bus_date = #{record.busDate,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recordTime != null">
+        record_time = #{record.recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.markTime != null">
+        mark_time = #{record.markTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.verifier != null">
+        verifier = #{record.verifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.printCount != null">
+        print_count = #{record.printCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_order
+    set id = #{record.id,jdbcType=BIGINT},
+      company_appid = #{record.companyAppid,jdbcType=VARCHAR},
+      provider_code = #{record.providerCode,jdbcType=VARCHAR},
+      store_id = #{record.storeId,jdbcType=BIGINT},
+      number = #{record.number,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      bus_date = #{record.busDate,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      record_time = #{record.recordTime,jdbcType=TIMESTAMP},
+      mark_time = #{record.markTime,jdbcType=TIMESTAMP},
+      verifier = #{record.verifier,jdbcType=VARCHAR},
+      print_count = #{record.printCount,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=TINYINT},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.mysql.Order">
+    update t_order
+    <set>
+      <if test="companyAppid != null">
+        company_appid = #{companyAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="providerCode != null">
+        provider_code = #{providerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="busDate != null">
+        bus_date = #{busDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="markTime != null">
+        mark_time = #{markTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="verifier != null">
+        verifier = #{verifier,jdbcType=VARCHAR},
+      </if>
+      <if test="printCount != null">
+        print_count = #{printCount,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.mysql.Order">
+    update t_order
+    set company_appid = #{companyAppid,jdbcType=VARCHAR},
+      provider_code = #{providerCode,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=BIGINT},
+      number = #{number,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      bus_date = #{busDate,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=TIMESTAMP},
+      mark_time = #{markTime,jdbcType=TIMESTAMP},
+      verifier = #{verifier,jdbcType=VARCHAR},
+      print_count = #{printCount,jdbcType=INTEGER},
+      state = #{state,jdbcType=TINYINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
