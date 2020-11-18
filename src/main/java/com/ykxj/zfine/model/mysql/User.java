@@ -10,7 +10,7 @@ public class User implements Serializable {
 
     private String nickname;
 
-    private Integer account;
+    private String account;
 
     private String password;
 
@@ -68,11 +68,11 @@ public class User implements Serializable {
         this.nickname = nickname;
     }
 
-    public Integer getAccount() {
+    public String getAccount() {
         return account;
     }
 
-    public void setAccount(Integer account) {
+    public void setAccount(String account) {
         this.account = account;
     }
 

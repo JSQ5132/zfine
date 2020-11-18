@@ -1,8 +1,9 @@
 package com.ykxj.zfine.service;
 
-import com.ykxj.zfine.dao.mysql.UserMapper;
+
 import com.ykxj.zfine.model.mysql.User;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Map;
 
 /**
  * @author JiangShengQiang
@@ -11,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public interface UserService {
 
+    User getUserByAccount(String account);
 
-    User getUserByAccountAndPassword();
-
-
+    Map<String,Object> createToken(String userId);
 }

@@ -5,7 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="account" jdbcType="INTEGER" property="account" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="head_icon" jdbcType="VARCHAR" property="headIcon" />
@@ -125,7 +125,7 @@
       create_time, create_user_id, last_update_time, 
       last_update_user_id)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
-      #{account,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
       #{headIcon,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=CHAR}, #{state,jdbcType=TINYINT}, 
       #{type,jdbcType=TINYINT}, #{allowStartTime,jdbcType=TIMESTAMP}, #{allowEndTime,jdbcType=TIMESTAMP}, 
       #{firstVisitTime,jdbcType=TIMESTAMP}, #{lastVisitTime,jdbcType=TIMESTAMP}, #{companyId,jdbcType=BIGINT}, 
@@ -204,7 +204,7 @@
         #{nickname,jdbcType=VARCHAR},
       </if>
       <if test="account != null">
-        #{account,jdbcType=INTEGER},
+        #{account,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -272,7 +272,7 @@
         nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
       <if test="record.account != null">
-        account = #{record.account,jdbcType=INTEGER},
+        account = #{record.account,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
@@ -329,7 +329,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
-      account = #{record.account,jdbcType=INTEGER},
+      account = #{record.account,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       head_icon = #{record.headIcon,jdbcType=VARCHAR},
@@ -359,7 +359,7 @@
         nickname = #{nickname,jdbcType=VARCHAR},
       </if>
       <if test="account != null">
-        account = #{account,jdbcType=INTEGER},
+        account = #{account,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
@@ -413,7 +413,7 @@
     update t_user
     set name = #{name,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
-      account = #{account,jdbcType=INTEGER},
+      account = #{account,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       head_icon = #{headIcon,jdbcType=VARCHAR},
@@ -431,4 +431,7 @@
       last_update_user_id = #{lastUpdateUserId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getUserByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"></include> FROM t_user WHERE account = #{account,jdbcType=VARCHAR}
+  </select>
 </mapper>

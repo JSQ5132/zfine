@@ -29,4 +29,7 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    //根据账号获取用户信息
+    User getUserByAccount(String account);
 }

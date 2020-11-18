@@ -1,6 +1,7 @@
 package com.ykxj.zfine.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.ykxj.zfine.dao.mysql.OrderDetailMapper;
 import com.ykxj.zfine.dao.mysql.OrderMapper;
 
 import com.ykxj.zfine.model.mysql.Order;
@@ -23,6 +24,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderMapper orderMapper;
 
+    @Autowired
+    OrderDetailMapper orderDetailMapper;
+
     @Override
     public List<Order> listOrder(String keyword, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
@@ -34,4 +38,6 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderMapper.selectByExample(orderExample);
     }
+
+
 }
