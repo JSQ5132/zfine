@@ -2,6 +2,7 @@ package com.ykxj.zfine.controller;
 
 
 import com.ykxj.zfine.common.api.CommonResult;
+
 import com.ykxj.zfine.common.utils.JWTUtils;
 import com.ykxj.zfine.model.dto.LoginDTO;
 import com.ykxj.zfine.model.mysql.User;
@@ -11,8 +12,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 /**
  * @author JiangShengQiang
