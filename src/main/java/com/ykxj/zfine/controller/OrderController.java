@@ -32,7 +32,7 @@ public class OrderController {
     @ApiOperation("订单列表")
     @GetMapping("/list")
     public CommonResult<CommonPage<Order>> list(
-            @RequestHeader("token")String token,
+            @RequestHeader("Authorization")String token,
             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum){
         List<Order> orderList = orderService.listOrder("", pageNum, pageSize);
@@ -41,8 +41,9 @@ public class OrderController {
     @RequiresPermissions({"/order/test"}) //没有的话 AuthorizationException
     @ApiOperation("订单列表")
     @GetMapping("/test")
+
     public String  test(
-            @RequestHeader("token")String token){
+            @RequestHeader("Authorization")String token){
        return "test-test-test-test-test-test-test";
     }
 

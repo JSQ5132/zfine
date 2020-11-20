@@ -1,20 +1,17 @@
 package com.ykxj.zfine.config.shiro;
 
-
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.AuthenticationToken;
 
 /**
- * Shiro自定义token类
- *
- * @Author 大誌
- * @Date 2019/3/31 10:58
- * @Version 1.0
+ * @author JiangShengQiang
+ * @date 2020/11/19 15:00
+ * @desc
  */
-public class AuthToken extends UsernamePasswordToken {
-
+public class JWTToken implements AuthenticationToken {
+    // 密钥
     private String token;
 
-    public AuthToken(String token) {
+    public JWTToken(String token) {
         this.token = token;
     }
 

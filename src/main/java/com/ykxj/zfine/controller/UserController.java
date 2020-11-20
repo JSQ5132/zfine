@@ -1,9 +1,8 @@
 package com.ykxj.zfine.controller;
 
-import com.ykxj.zfine.common.api.CommonPage;
 import com.ykxj.zfine.common.api.CommonResult;
+import com.ykxj.zfine.common.utils.JWTUtils;
 import com.ykxj.zfine.model.dto.LoginDTO;
-import com.ykxj.zfine.model.mysql.Order;
 import com.ykxj.zfine.model.mysql.User;
 import com.ykxj.zfine.service.UserService;
 import io.swagger.annotations.Api;
@@ -12,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,10 +39,8 @@ public class UserController {
         if (user == null || !user.getPassword().equals(password)) {
             return CommonResult.validateFailed("账号或密码有误");
         } else {
-            //生成token，并保存到数据库
-            Map<String, Object> tokenMap = userService.createToken(user.getAccount());
-
-            return CommonResult.success(tokenMap);
+            String token = JWTUtils.sign(account, password, 60);
+            return CommonResult.success(token);
         }
 
     }

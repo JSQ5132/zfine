@@ -14,5 +14,4 @@ public interface UserService {
 
     User getUserByAccount(String account);
 
-    Map<String,Object> createToken(String userId);
 }
