@@ -30,11 +30,11 @@ public class NoPermissionException {
     public Map<String, Object> AuthorizationException(Exception ex) {
         Map<String, Object> result = new HashMap<>();
         result.put("status", 403);
-        result.put("msg", "权限认证失败！");
+        result.put("msg", "您没有该访问权限！");
         return result;
     }
     @ResponseBody
-    @ExceptionHandler(AuthenticationException.class)
+    @ExceptionHandler(IllegalStateException.class)
     public Map<String, Object> IllegalStateException(Exception ex) {
         Map<String, Object> result = new HashMap<>();
         result.put("status", 403);

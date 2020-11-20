@@ -32,7 +32,6 @@ public class OrderController {
     @ApiOperation("订单列表")
     @GetMapping("/list")
     public CommonResult<CommonPage<Order>> list(
-            @RequestHeader("Authorization")String token,
             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum){
         List<Order> orderList = orderService.listOrder("", pageNum, pageSize);
@@ -42,8 +41,7 @@ public class OrderController {
     @ApiOperation("订单列表")
     @GetMapping("/test")
 
-    public String  test(
-            @RequestHeader("Authorization")String token){
+    public String  test(){
        return "test-test-test-test-test-test-test";
     }
 

@@ -1,18 +1,15 @@
 package com.ykxj.zfine.config.shiro;
 
 
-import cn.hutool.core.util.StrUtil;
-import com.auth0.jwt.exceptions.SignatureVerificationException;
-import com.auth0.jwt.exceptions.TokenExpiredException;
+
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
 
 /**
  * @author JiangShengQiang
@@ -81,6 +78,8 @@ public class JWTFilter  extends BasicHttpAuthenticationFilter {
             }
         }
         return true;
+
+
 //        if (isLoginAttempt(request, response)) {
 //            try {
 //                this.executeLogin(request, response);

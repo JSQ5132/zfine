@@ -14,4 +14,5 @@ public interface UserService {
 
     User getUserByAccount(String account);
 
+    int saveUser(User user);
 }

@@ -39,7 +39,7 @@ public class UserController {
         if (user == null || !user.getPassword().equals(password)) {
             return CommonResult.validateFailed("账号或密码有误");
         } else {
-            String token = JWTUtils.sign(account, password, 60);
+            String token = JWTUtils.sign(account, password,30);
             return CommonResult.success(token);
         }
 

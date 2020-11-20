@@ -1,5 +1,6 @@
 package com.ykxj.zfine.config.shiro;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.ykxj.zfine.common.utils.JWTUtils;
 import com.ykxj.zfine.model.mysql.User;
 import com.ykxj.zfine.service.UserService;
@@ -30,7 +31,7 @@ public class JWTRealm extends AuthorizingRealm {
     private UserService userService;
 
     /**
-     * 大坑！，必须重写此方法，不然Shiro会报错
+     * 添加JWTToken支持，限定这个Realm只支持我们自定义的JWT Token,大坑！，必须重写此方法，不然Shiro会报错
      */
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -69,8 +70,9 @@ public class JWTRealm extends AuthorizingRealm {
             throw new AuthenticationException("用户不存在!");
         }
         if (! JWTUtils.verify(token, username, user.getPassword())) {
-            throw new AuthenticationException("用户名或密码错误！");
+            throw new AuthenticationException("token 已过期！");
         }
+
         return new SimpleAuthenticationInfo(token, token, this.getName());
     }
 

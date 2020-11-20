@@ -7,6 +7,7 @@
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="account" jdbcType="VARCHAR" property="account" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="head_icon" jdbcType="VARCHAR" property="headIcon" />
     <result column="mobile_phone" jdbcType="CHAR" property="mobilePhone" />
@@ -81,7 +82,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, nickname, account, password, email, head_icon, mobile_phone, state, type, 
+    id, name, nickname, account, password, salt, email, head_icon, mobile_phone, state, type,
     allow_start_time, allow_end_time, first_visit_time, last_visit_time, company_id, 
     create_time, create_user_id, last_update_time, last_update_user_id
   </sql>
@@ -118,14 +119,14 @@
   </delete>
   <insert id="insert" parameterType="com.ykxj.zfine.model.mysql.User">
     insert into t_user (id, name, nickname, 
-      account, password, email, 
+      account, password, salt, email,
       head_icon, mobile_phone, state, 
       type, allow_start_time, allow_end_time, 
       first_visit_time, last_visit_time, company_id, 
       create_time, create_user_id, last_update_time, 
       last_update_user_id)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
-      #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+      #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
       #{headIcon,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=CHAR}, #{state,jdbcType=TINYINT}, 
       #{type,jdbcType=TINYINT}, #{allowStartTime,jdbcType=TIMESTAMP}, #{allowEndTime,jdbcType=TIMESTAMP}, 
       #{firstVisitTime,jdbcType=TIMESTAMP}, #{lastVisitTime,jdbcType=TIMESTAMP}, #{companyId,jdbcType=BIGINT}, 
@@ -149,6 +150,9 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="salt != null">
+        salt,
       </if>
       <if test="email != null">
         email,
@@ -208,6 +212,9 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
@@ -277,6 +284,9 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.salt != null">
+        salt = #{record.salt,jdbcType=VARCHAR},
+      </if>
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
@@ -331,6 +341,7 @@
       nickname = #{record.nickname,jdbcType=VARCHAR},
       account = #{record.account,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      saltp = #{record.saltp,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       head_icon = #{record.headIcon,jdbcType=VARCHAR},
       mobile_phone = #{record.mobilePhone,jdbcType=CHAR},
@@ -363,6 +374,9 @@
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
@@ -415,6 +429,7 @@
       nickname = #{nickname,jdbcType=VARCHAR},
       account = #{account,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       head_icon = #{headIcon,jdbcType=VARCHAR},
       mobile_phone = #{mobilePhone,jdbcType=CHAR},

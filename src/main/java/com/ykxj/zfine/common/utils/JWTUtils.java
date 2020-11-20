@@ -4,6 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import java.util.Calendar;
@@ -16,6 +18,8 @@ import java.util.Date;
  */
 public class JWTUtils {
 
+    // 过期时间5分钟
+    private static final long EXPIRE_TIME = 5*60*1000;
     /**
      * 校验token是否正确
      * @param token 密钥
@@ -30,7 +34,14 @@ public class JWTUtils {
                     .build();
             DecodedJWT jwt = verifier.verify(token);
             return true;
+        } catch (SignatureVerificationException e) {
+            e.printStackTrace();
+            return false;
+        } catch (TokenExpiredException tokenExpiredException){
+            tokenExpiredException.printStackTrace();
+            return false;
         } catch (Exception exception) {
+            exception.printStackTrace();
             return false;
         }
     }
@@ -69,6 +80,23 @@ public class JWTUtils {
      */
     public static String sign(String username, String salt, long time) {
         Date date = new Date(System.currentTimeMillis()+time*1000);
+        Algorithm algorithm = Algorithm.HMAC256(salt);
+        // 附带username信息
+        return JWT.create()
+                .withClaim("username", username)
+                //到期时间
+                .withExpiresAt(date)
+                .withIssuedAt(new Date())
+                .sign(algorithm);
+    }
+
+    /**
+     * 生成签名,expireTime后过期 采用默认过期时间
+     * @param username 用户名
+     * @return 加密的token
+     */
+    public static String sign(String username, String salt) {
+        Date date = new Date(System.currentTimeMillis()+EXPIRE_TIME*1000);
         Algorithm algorithm = Algorithm.HMAC256(salt);
         // 附带username信息
         return JWT.create()
