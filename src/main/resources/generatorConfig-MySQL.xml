@@ -54,34 +54,17 @@
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"/>-->
 
-        <table tableName="t_user" domainObjectName="User"
-               enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
 
-        <table tableName="t_role" domainObjectName="Role"
-               enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
-        <table tableName="t_user_role" domainObjectName="UserRole"
-               enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
 
         <table tableName="t_role_menu" domainObjectName="RoleMenu"
-               enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
 
-        <table tableName="t__menu" domainObjectName="Menu"
-               enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
+<!--        <table tableName="t_customerquery_pictures" domainObjectName="CustomerqueryPictures"
+               enableSelectByExample="false" enableDeleteByExample="false"
+               enableCountByExample="false" enableUpdateByExample="false" modelType="flat"></table>-->
 
-        <table tableName="t_menu_button" domainObjectName="MenuButton"
-               enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
 
     </context>
 </generatorConfiguration>

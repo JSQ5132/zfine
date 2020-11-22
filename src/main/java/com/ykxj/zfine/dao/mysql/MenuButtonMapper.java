@@ -27,4 +27,6 @@ public interface MenuButtonMapper {
     int updateByPrimaryKeySelective(MenuButton record);
 
     int updateByPrimaryKey(MenuButton record);
+
+    List<MenuButton> listMenuButtonByMenuId(Long menuId);
 }

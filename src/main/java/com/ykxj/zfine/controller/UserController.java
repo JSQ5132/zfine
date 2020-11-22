@@ -30,18 +30,9 @@ public class UserController {
     @PostMapping("/login")
     public CommonResult list(
             @RequestBody @Validated LoginDTO loginDTO){
-        String account = loginDTO.getAccount();
-        String password = loginDTO.getPassword();
 
-        //用户信息
-        User user = userService.getUserByAccount(account);
-        //账号不存在、密码错误
-        if (user == null || !user.getPassword().equals(password)) {
-            return CommonResult.validateFailed("账号或密码有误");
-        } else {
-            String token = JWTUtils.sign(account, password,30);
-            return CommonResult.success(token);
-        }
 
+        String token = userService.login(loginDTO);
+        return CommonResult.success(token);
     }
 }

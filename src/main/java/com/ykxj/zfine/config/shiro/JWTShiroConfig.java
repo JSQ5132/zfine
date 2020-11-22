@@ -47,6 +47,9 @@ public class JWTShiroConfig {
     }
 
 
+    /**
+     * 设置过滤器，将自定义的Filter加入
+     */
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {//@Qualifier("securityManager")
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();

@@ -7,9 +7,12 @@ spring:
   datasource:
     # MySQL数据源配置
     mysql:
-      jdbc-url: jdbc:mysql://localhost:3306/zfine_java?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#      jdbc-url: jdbc:mysql://localhost:3306/zfine_java?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#      username: root
+#      password: root
+      jdbc-url: jdbc:mysql://39.106.228.205:3306/zfine_java?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
       username: root
-      password: root
+      password: ykxj2020@
       # 使用druid数据源
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver

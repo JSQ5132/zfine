@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykxj.zfine.dao.mysql.CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.mysql.Company">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="appkey" jdbcType="VARCHAR" property="appkey" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="erp_type" jdbcType="VARCHAR" property="erpType" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="linkman" jdbcType="VARCHAR" property="linkman" />
+    <result column="create_provider_amount" jdbcType="SMALLINT" property="createProviderAmount" />
+    <result column="expire_tiem" jdbcType="TIMESTAMP" property="expireTiem" />
+    <result column="mobile_phone" jdbcType="CHAR" property="mobilePhone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="customer" jdbcType="VARCHAR" property="customer" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="last_update_user_id" jdbcType="BIGINT" property="lastUpdateUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, appid, appkey, name, erp_type, version, linkman, create_provider_amount, expire_tiem, 
+    mobile_phone, email, address, customer, state, description, create_time, create_user_id, 
+    last_update_time, last_update_user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_company
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_company
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ykxj.zfine.model.mysql.Company">
+    insert into t_company (id, appid, appkey, 
+      name, erp_type, version, 
+      linkman, create_provider_amount, expire_tiem, 
+      mobile_phone, email, address, 
+      customer, state, description, 
+      create_time, create_user_id, last_update_time, 
+      last_update_user_id)
+    values (#{id,jdbcType=BIGINT}, #{appid,jdbcType=VARCHAR}, #{appkey,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{erpType,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{linkman,jdbcType=VARCHAR}, #{createProviderAmount,jdbcType=SMALLINT}, #{expireTiem,jdbcType=TIMESTAMP}, 
+      #{mobilePhone,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{customer,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdateUserId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.mysql.Company">
+    insert into t_company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="appkey != null">
+        appkey,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="erpType != null">
+        erp_type,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="linkman != null">
+        linkman,
+      </if>
+      <if test="createProviderAmount != null">
+        create_provider_amount,
+      </if>
+      <if test="expireTiem != null">
+        expire_tiem,
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="customer != null">
+        customer,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+      <if test="lastUpdateUserId != null">
+        last_update_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="appkey != null">
+        #{appkey,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="erpType != null">
+        #{erpType,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null">
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="createProviderAmount != null">
+        #{createProviderAmount,jdbcType=SMALLINT},
+      </if>
+      <if test="expireTiem != null">
+        #{expireTiem,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobilePhone != null">
+        #{mobilePhone,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null">
+        #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null">
+        #{lastUpdateUserId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.mysql.Company">
+    update t_company
+    <set>
+      <if test="appid != null">
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="appkey != null">
+        appkey = #{appkey,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="erpType != null">
+        erp_type = #{erpType,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null">
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="createProviderAmount != null">
+        create_provider_amount = #{createProviderAmount,jdbcType=SMALLINT},
+      </if>
+      <if test="expireTiem != null">
+        expire_tiem = #{expireTiem,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone = #{mobilePhone,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null">
+        customer = #{customer,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null">
+        last_update_user_id = #{lastUpdateUserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.mysql.Company">
+    update t_company
+    set appid = #{appid,jdbcType=VARCHAR},
+      appkey = #{appkey,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      erp_type = #{erpType,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      create_provider_amount = #{createProviderAmount,jdbcType=SMALLINT},
+      expire_tiem = #{expireTiem,jdbcType=TIMESTAMP},
+      mobile_phone = #{mobilePhone,jdbcType=CHAR},
+      email = #{email,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      customer = #{customer,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      last_update_user_id = #{lastUpdateUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

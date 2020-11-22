@@ -289,4 +289,12 @@
       last_update_user_id = #{lastUpdateUserId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="listUserRoleByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"></include> FROM t_role
+    WHERE id IN (
+        SELECT role_id FROM t_user_role WHERE user_id = #{userId,jdbcType=BIGINT}
+    )
+
+  </select>
 </mapper>

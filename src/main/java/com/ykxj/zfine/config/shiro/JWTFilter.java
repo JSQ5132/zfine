@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class JWTFilter  extends BasicHttpAuthenticationFilter {
 
     /**
-     * 判断用户是否想要登入。
+     * 判断用户是否登录请求。
      * 检测header里面是否包含Authorization字段即可
      */
     @Override

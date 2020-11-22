@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ykxj.zfine.dao.mysql.MenuButtonMapper">
-  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.mysql.MenuButton">
+<mapper namespace="com.ykxj.zfine.dao.mysql.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.ykxj.zfine.model.mysql.Menu">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="menu_id" jdbcType="BIGINT" property="menuId" />
-    <result column="parentId" jdbcType="BIGINT" property="parentid" />
-    <result column="layers" jdbcType="VARCHAR" property="layers" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
-    <result column="event" jdbcType="VARCHAR" property="event" />
-    <result column="url_address" jdbcType="VARCHAR" property="urlAddress" />
-    <result column="sort" jdbcType="TINYINT" property="sort" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="sort" jdbcType="TINYINT" property="sort" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="last_update_user_id" jdbcType="BIGINT" property="lastUpdateUserId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,17 +74,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, menu_id, parentId, layers, name, icon, event, url_address, sort, description, 
-    create_time, create_user_id
+    id, parent_id, name, level, icon, url, description, sort, create_time, create_user_id, 
+    last_update_time, last_update_user_id
   </sql>
-  <select id="selectByExample" parameterType="com.ykxj.zfine.model.mysql.MenuButtonExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ykxj.zfine.model.mysql.MenuExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from t_menu_button
+    from t_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -95,63 +95,55 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from t_menu_button
+    from t_menu
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from t_menu_button
+    delete from t_menu
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.mysql.MenuButtonExample">
-    delete from t_menu_button
+  <delete id="deleteByExample" parameterType="com.ykxj.zfine.model.mysql.MenuExample">
+    delete from t_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ykxj.zfine.model.mysql.MenuButton">
-    insert into t_menu_button (id, menu_id, parentId, 
-      layers, name, icon, 
-      event, url_address, sort, 
-      description, create_time, create_user_id
-      )
-    values (#{id,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT}, #{parentid,jdbcType=BIGINT}, 
-      #{layers,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
-      #{event,jdbcType=VARCHAR}, #{urlAddress,jdbcType=VARCHAR}, #{sort,jdbcType=TINYINT}, 
-      #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}
-      )
+  <insert id="insert" parameterType="com.ykxj.zfine.model.mysql.Menu">
+    insert into t_menu (id, parent_id, name, 
+      level, icon, url, description, 
+      sort, create_time, create_user_id, 
+      last_update_time, last_update_user_id)
+    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{level,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{lastUpdateTime,jdbcType=TIMESTAMP}, #{lastUpdateUserId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.mysql.MenuButton">
-    insert into t_menu_button
+  <insert id="insertSelective" parameterType="com.ykxj.zfine.model.mysql.Menu">
+    insert into t_menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="menuId != null">
-        menu_id,
-      </if>
-      <if test="parentid != null">
-        parentId,
-      </if>
-      <if test="layers != null">
-        layers,
+      <if test="parentId != null">
+        parent_id,
       </if>
       <if test="name != null">
         name,
       </if>
+      <if test="level != null">
+        level,
+      </if>
       <if test="icon != null">
         icon,
       </if>
-      <if test="event != null">
-        event,
-      </if>
-      <if test="urlAddress != null">
-        url_address,
-      </if>
-      <if test="sort != null">
-        sort,
+      <if test="url != null">
+        url,
       </if>
       <if test="description != null">
         description,
+      </if>
+      <if test="sort != null">
+        sort,
       </if>
       <if test="createTime != null">
         create_time,
@@ -159,37 +151,37 @@
       <if test="createUserId != null">
         create_user_id,
       </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+      <if test="lastUpdateUserId != null">
+        last_update_user_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="menuId != null">
-        #{menuId,jdbcType=BIGINT},
-      </if>
-      <if test="parentid != null">
-        #{parentid,jdbcType=BIGINT},
-      </if>
-      <if test="layers != null">
-        #{layers,jdbcType=VARCHAR},
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
       <if test="icon != null">
         #{icon,jdbcType=VARCHAR},
       </if>
-      <if test="event != null">
-        #{event,jdbcType=VARCHAR},
-      </if>
-      <if test="urlAddress != null">
-        #{urlAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=TINYINT},
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
       </if>
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -197,46 +189,46 @@
       <if test="createUserId != null">
         #{createUserId,jdbcType=BIGINT},
       </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null">
+        #{lastUpdateUserId,jdbcType=BIGINT},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ykxj.zfine.model.mysql.MenuButtonExample" resultType="java.lang.Integer">
-    select count(*) from t_menu_button
+  <select id="countByExample" parameterType="com.ykxj.zfine.model.mysql.MenuExample" resultType="java.lang.Integer">
+    select count(*) from t_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update t_menu_button
+    update t_menu
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.menuId != null">
-        menu_id = #{record.menuId,jdbcType=BIGINT},
-      </if>
-      <if test="record.parentid != null">
-        parentId = #{record.parentid,jdbcType=BIGINT},
-      </if>
-      <if test="record.layers != null">
-        layers = #{record.layers,jdbcType=VARCHAR},
+      <if test="record.parentId != null">
+        parent_id = #{record.parentId,jdbcType=BIGINT},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
       <if test="record.icon != null">
         icon = #{record.icon,jdbcType=VARCHAR},
       </if>
-      <if test="record.event != null">
-        event = #{record.event,jdbcType=VARCHAR},
-      </if>
-      <if test="record.urlAddress != null">
-        url_address = #{record.urlAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sort != null">
-        sort = #{record.sort,jdbcType=TINYINT},
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
       </if>
       <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=TINYINT},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -244,58 +236,58 @@
       <if test="record.createUserId != null">
         create_user_id = #{record.createUserId,jdbcType=BIGINT},
       </if>
+      <if test="record.lastUpdateTime != null">
+        last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateUserId != null">
+        last_update_user_id = #{record.lastUpdateUserId,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update t_menu_button
+    update t_menu
     set id = #{record.id,jdbcType=BIGINT},
-      menu_id = #{record.menuId,jdbcType=BIGINT},
-      parentId = #{record.parentid,jdbcType=BIGINT},
-      layers = #{record.layers,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=VARCHAR},
       icon = #{record.icon,jdbcType=VARCHAR},
-      event = #{record.event,jdbcType=VARCHAR},
-      url_address = #{record.urlAddress,jdbcType=VARCHAR},
-      sort = #{record.sort,jdbcType=TINYINT},
+      url = #{record.url,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      create_user_id = #{record.createUserId,jdbcType=BIGINT}
+      create_user_id = #{record.createUserId,jdbcType=BIGINT},
+      last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      last_update_user_id = #{record.lastUpdateUserId,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.mysql.MenuButton">
-    update t_menu_button
+  <update id="updateByPrimaryKeySelective" parameterType="com.ykxj.zfine.model.mysql.Menu">
+    update t_menu
     <set>
-      <if test="menuId != null">
-        menu_id = #{menuId,jdbcType=BIGINT},
-      </if>
-      <if test="parentid != null">
-        parentId = #{parentid,jdbcType=BIGINT},
-      </if>
-      <if test="layers != null">
-        layers = #{layers,jdbcType=VARCHAR},
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="level != null">
+        level = #{level,jdbcType=VARCHAR},
+      </if>
       <if test="icon != null">
         icon = #{icon,jdbcType=VARCHAR},
       </if>
-      <if test="event != null">
-        event = #{event,jdbcType=VARCHAR},
-      </if>
-      <if test="urlAddress != null">
-        url_address = #{urlAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=TINYINT},
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
       </if>
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -303,25 +295,31 @@
       <if test="createUserId != null">
         create_user_id = #{createUserId,jdbcType=BIGINT},
       </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null">
+        last_update_user_id = #{lastUpdateUserId,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.mysql.MenuButton">
-    update t_menu_button
-    set menu_id = #{menuId,jdbcType=BIGINT},
-      parentId = #{parentid,jdbcType=BIGINT},
-      layers = #{layers,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.ykxj.zfine.model.mysql.Menu">
+    update t_menu
+    set parent_id = #{parentId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
-      event = #{event,jdbcType=VARCHAR},
-      url_address = #{urlAddress,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=TINYINT},
+      url = #{url,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_user_id = #{createUserId,jdbcType=BIGINT}
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      last_update_user_id = #{lastUpdateUserId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="listMenuButtonByMenuId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    SELECT * FROM t_menu_button WHERE menu_id = #{menuId,jdbcType=BIGINT}
+  <select id="listMenuByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT * FROM t_menu WHERE id IN (SELECT menu_id FROM t_role_menu WHERE role_id = #{roleId,jdbcType=BIGINT})
   </select>
 </mapper>
