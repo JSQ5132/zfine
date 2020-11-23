@@ -1,5 +1,6 @@
 package com.ykxj.zfine.common.utils;
 
+import cn.hutool.core.util.StrUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -10,6 +11,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import java.util.Calendar;
 import java.util.Date;
+
 
 /**
  * @author JiangShengQiang
@@ -125,4 +127,5 @@ public class JWTUtils {
         String hex = secureRandom.nextBytes(16).toHex();
         return hex;
     }
+
 }

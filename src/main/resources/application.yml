@@ -57,12 +57,17 @@ mybatis:
     - classpath*:com/**/mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-token:
-  #  token过期时间，单位分钟
-  tokenExpireTime: 120
-  #  RefreshToken过期时间，单位：分钟, 24*60=1440
-  refreshTokenExpireTime: 1440
-  #  shiro缓存有效期，单位分钟,2*60=120
-  shiroCacheExpireTime: 120
-  #  token加密密钥
-  secretKey: storywebkey
+
+jwt:
+  token:
+    #JWT存储的请求头
+    tokenHeader: Authorization
+    #  token过期时间，单位分钟
+    tokenExpireTime: 120
+    #  RefreshToken过期时间，单位：分钟, 24*60=1440
+    refreshTokenExpireTime: 1440
+    #  shiro缓存有效期，单位分钟,2*60=120
+    shiroCacheExpireTime: 120
+    #  token加密密钥
+    secretKey: storywebkey
+

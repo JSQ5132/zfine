@@ -1,6 +1,7 @@
 package com.ykxj.zfine.service;
 
 
+import com.ykxj.zfine.common.api.CommonResult;
 import com.ykxj.zfine.model.dto.LoginDTO;
 import com.ykxj.zfine.model.mysql.User;
 
@@ -16,4 +17,8 @@ public interface UserService {
     int saveUser(User user);
 
     String login(LoginDTO loginDTO);
+
+    String register(User user);
+
+    CommonResult refreshToken(String oldToken);
 }

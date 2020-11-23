@@ -1,6 +1,7 @@
 package com.ykxj.zfine.config.shiro;
 
 
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SessionsSecurityManager;
@@ -66,7 +67,8 @@ public class JWTShiroConfig {
         // anno匿名访问  auth验证
         filterMap.put("/webjars/**", "anon");
         filterMap.put("/druid/**", "anon");
-        filterMap.put("/sys/login", "anon");
+        filterMap.put("/user/login", "anon");
+        filterMap.put("/user/register", "anon");
         filterMap.put("/swagger/**", "anon");
         filterMap.put("/v2/api-docs", "anon");
         filterMap.put("/swagger-ui.html", "anon");
@@ -114,12 +116,12 @@ public class JWTShiroConfig {
      *
      * @return
      */
-//    @Bean
-//    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-//        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-//        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用md5算法;
-//        hashedCredentialsMatcher.setHashIterations(1024);//散列的次数，比如散列两次，相当于 md5( md5(""));
-//        return hashedCredentialsMatcher;
-//    }
+    @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用md5算法;
+        hashedCredentialsMatcher.setHashIterations(1024);//散列的次数，比如散列两次，相当于 md5( md5(""));
+        return hashedCredentialsMatcher;
+    }
 
 }
