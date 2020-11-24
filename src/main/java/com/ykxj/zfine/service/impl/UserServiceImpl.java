@@ -21,10 +21,9 @@ import java.util.Date;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    //12小时后失效
-    private final static int EXPIRE = 12;
+
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
 
     @Override

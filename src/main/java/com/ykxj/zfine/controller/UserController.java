@@ -1,6 +1,7 @@
 package com.ykxj.zfine.controller;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.ykxj.zfine.common.api.CommonResult;
 
 import com.ykxj.zfine.common.utils.JWTUtils;
@@ -40,7 +41,6 @@ public class UserController {
         return CommonResult.success(token);
     }
 
-
     @ApiOperation("用户注册")
     @PostMapping("/register")
     public CommonResult register(
@@ -53,6 +53,9 @@ public class UserController {
     @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
     public CommonResult refreshToken(HttpServletRequest request) {
         String oldToken = request.getHeader(tokenHeader);
+        if (StrUtil.isEmpty(oldToken)){
+            return CommonResult.failed("未获取当前token！");
+        }
         return userService.refreshToken(oldToken);
     }
 
