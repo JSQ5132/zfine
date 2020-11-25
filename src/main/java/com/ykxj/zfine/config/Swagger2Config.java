@@ -26,7 +26,10 @@ public class Swagger2Config {
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
+                //修正Byte转string的Bug
+                .directModelSubstitute(Byte.class, Integer.class)
                 .select()
+                //修正Byte转string的Bug
                 .apis(RequestHandlerSelectors.basePackage("com.ykxj.zfine.controller"))//需要的扫描的包
                 .paths(PathSelectors.any())
                 .build()

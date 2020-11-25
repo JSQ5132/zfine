@@ -9,7 +9,9 @@ import com.ykxj.zfine.dao.mysql.UserMapper;
 import com.ykxj.zfine.model.dto.LoginDTO;
 import com.ykxj.zfine.model.mysql.User;
 import com.ykxj.zfine.service.UserService;
+import com.ykxj.zfine.service.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -25,6 +27,16 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private RedisService redisService;
+    @Value("${redis.database}")
+    private String REDIS_DATABASE;
+    @Value("${redis.expire.common}")
+    private Long REDIS_EXPIRE;
+    @Value("${redis.key.user}")
+    private String REDIS_KEY_ADMIN;
+    @Value("${redis.key.resourceList}")
+    private String REDIS_KEY_RESOURCE_LIST;
 
     @Override
     public User getUserByAccount(String account) {
@@ -45,6 +57,9 @@ public class UserServiceImpl implements UserService {
         if (user == null || EndecryptUtils.checkMd5Password(user.getAccount(), loginDTO.getPassword(), user.getSalt(), user.getPassword()) ==false) {
             return "账号或密码有误";
         } else {
+            String key = REDIS_DATABASE + ":" + REDIS_KEY_ADMIN + ":" + user.getAccount();
+            redisService.set(key,user);
+
             String token = JWTUtils.sign(user.getAccount(), user.getPassword());
             return token;
         }

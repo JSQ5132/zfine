@@ -85,6 +85,7 @@ public class JWTRealm extends AuthorizingRealm {
 
 
         simpleAuthorizationInfo.addStringPermission("/order/list");//测试设置固定权限
+        simpleAuthorizationInfo.addStringPermission("/company/save");//测试设置固定权限
         return simpleAuthorizationInfo;
     }
 

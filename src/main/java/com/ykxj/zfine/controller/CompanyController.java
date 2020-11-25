@@ -30,7 +30,7 @@ public class CompanyController {
     @RequiresPermissions({"/company/save"}) //没有的话 AuthorizationException
     @ApiOperation("新增商场")
     @PostMapping("/save")
-    public CommonResult save(@RequestBody @Validated CompanyDTO companyDTO){
+    public CommonResult save(@RequestBody  CompanyDTO companyDTO){
         int count = companyService.saveCompany(companyDTO);
         if (count > 0) {
             return CommonResult.success(count);
