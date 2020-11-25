@@ -21,10 +21,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 /**
  * @author JiangShengQiang
@@ -61,6 +59,7 @@ public class JWTRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        LOGGER.info("doGetAuthorizationInfo方法开始执行====================对用户授权开始");
         String username = JWTUtils.getUsername(principals.toString());
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         User user = userService.getUserByAccount(username);
@@ -86,6 +85,7 @@ public class JWTRealm extends AuthorizingRealm {
 
         simpleAuthorizationInfo.addStringPermission("/order/list");//测试设置固定权限
         simpleAuthorizationInfo.addStringPermission("/company/save");//测试设置固定权限
+        LOGGER.info("doGetAuthorizationInfo方法结束====================对用户授权完毕");
         return simpleAuthorizationInfo;
     }
 

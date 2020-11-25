@@ -27,7 +27,7 @@ import java.time.Duration;
  */
 @Configuration
 @EnableCaching
-public class BaseRedisConfig {
+public class RedisConfig {
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
@@ -44,7 +44,7 @@ public class BaseRedisConfig {
 
     @Bean
     public RedisSerializer<Object> redisSerializer() {
-        //创建JSON序列化器
+        //创建JSON序列化器，使用Jackson2JsonRedisSerialize 替换默认序列化
         Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);

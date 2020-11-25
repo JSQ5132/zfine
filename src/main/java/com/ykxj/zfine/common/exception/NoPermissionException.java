@@ -21,23 +21,23 @@ public class NoPermissionException {
     @ExceptionHandler(UnauthorizedException.class)
     public Map<String, Object> handleShiroException(Exception ex) {
         Map<String, Object> result = new HashMap<>();
-        result.put("status", 403);
-        result.put("msg", "无权限！");
+        result.put("code", 403);
+        result.put("msg", "您没有权限访问该资源！");
         return result;
     }
     @ResponseBody
     @ExceptionHandler(AuthorizationException.class)
     public Map<String, Object> AuthorizationException(Exception ex) {
         Map<String, Object> result = new HashMap<>();
-        result.put("status", 403);
-        result.put("msg", "您没有该访问权限！");
+        result.put("code", 403);
+        result.put("msg", "权限认证失败！");
         return result;
     }
     @ResponseBody
     @ExceptionHandler(IllegalStateException.class)
     public Map<String, Object> IllegalStateException(Exception ex) {
         Map<String, Object> result = new HashMap<>();
-        result.put("status", 403);
+        result.put("code", 403);
         result.put("msg", "权限认证失败或token过期！");
         return result;
 

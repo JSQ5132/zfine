@@ -4,17 +4,19 @@ package com.ykxj.zfine.config.shiro;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
-import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.apache.shiro.mgt.SecurityManager;
+
 
 
 import javax.servlet.Filter;
@@ -33,7 +35,13 @@ public class JWTShiroConfig {
     @Bean("securityManager")
     public DefaultWebSecurityManager  securityManager(JWTRealm realm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+
+        // 设置realm.
         securityManager.setRealm(realm);
+        // 启用授权缓存,自定义缓存实现 使用redis
+        realm.setAuthorizationCachingEnabled(true);
+        securityManager.setCacheManager(cacheManager());
+        realm.setAuthorizationCacheName("authorizationCache");
         /*
          * 关闭shiro自带的session，详情见文档
          * http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
@@ -97,6 +105,10 @@ public class JWTShiroConfig {
         return defaultAdvisorAutoProxyCreator;
     }
 
+    /**
+     * 配置Shiro生命周期处理器
+     * @return
+     */
     @Bean
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
@@ -122,6 +134,39 @@ public class JWTShiroConfig {
         hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用md5算法;
         hashedCredentialsMatcher.setHashIterations(1024);//散列的次数，比如散列两次，相当于 md5( md5(""));
         return hashedCredentialsMatcher;
+    }
+
+
+
+    /**
+     * cacheManager 缓存 redis实现
+     * 使用的是shiro-redis开源插件
+     *
+     * @return
+     */
+    public RedisCacheManager cacheManager() {
+        RedisCacheManager redisCacheManager = new RedisCacheManager();
+        redisCacheManager.setRedisManager(redisManager());
+        return redisCacheManager;
+    }
+
+    /**
+     * 配置shiro redisManager
+     * 使用的是shiro-redis开源插件
+     *
+     * @return
+     */
+    @Bean
+    public RedisManager redisManager() {
+        RedisManager redisManager = new RedisManager();
+//        RedisManager redisManager = new RedisManager();
+//        redisManager.setHost(host);
+//        redisManager.setPort(port);
+//        // 配置缓存过期时间
+//        redisManager.setExpire(expireTime);
+//        redisManager.setTimeout(timeOut);
+        // redisManager.setPassword(password);
+        return redisManager;
     }
 
 }
